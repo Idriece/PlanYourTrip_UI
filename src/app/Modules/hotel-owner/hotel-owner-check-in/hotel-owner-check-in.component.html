@@ -1,0 +1,225 @@
+<mat-tab-group [selectedIndex]="1" mat-stretch-tabs="always">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="material-icons" style="font-size: 35px; padding-right: 10px; ">history</i>
+      <h5> Past Bookings</h5>
+    </ng-template>
+    <ng-template matTabContent>
+        <h3 align="center" style="padding-top:20px;">Past CheckedIn Users</h3>
+        <div style="padding-left:87vw">
+            <a mat-raised-button routerLink="../">Back to Hotel List</a></div>
+        <div *ngIf="pastCheckedIn?.length > 0">
+          <mat-list role="list" style="margin-left:24%; margin-bottom:50px; margin-right:25%" class="mat-elevation-z8">
+            <mat-list-item role="listitem">
+              <span style="padding-left:40px;width: 37%"><b>Booker Name</b></span>
+              <span style="width: 42%"><b>Number Of People</b></span>
+              <span style="width: 27%"><b>CheckIn Status</b></span>
+            </mat-list-item>
+            <mat-accordion multi="false">
+              <mat-expansion-panel *ngFor="let past of pastCheckedIn">
+                <mat-expansion-panel-header>
+                  <mat-panel-title style="width: 33%">
+                    <h5> <i class="fas fa-user-tie" style="margin-right:15px"></i>{{past.FirstName}} {{past.LastName}}</h5>
+                  </mat-panel-title>
+                  <mat-panel-title style="width: 33%">
+                    <h5> <i class="fa fa-users" style="margin-right:15px"></i> {{past.NumPeople}}</h5>
+                  </mat-panel-title>
+                  <mat-panel-title>
+                    <div>
+                      <h5 style="margin-right:55px"><i class="fas fa-user-check"></i></h5>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-panel-description>
+                  <h6 style="padding-right:18%;">Email Id: {{past.Email}}</h6>
+                  <h6 style="padding-right:30px;">Payment Method: {{past.PaymentMethod}}</h6>
+                  <h6 style="padding-right:30px;">CheckIn Date: {{past.CheckInDate | date}}</h6>
+                </mat-panel-description>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-list>
+        </div>
+      <br><br>
+      <hr>
+      <h3 align="center" style="padding-top:20px;">Past NotCheckedIn Users</h3>
+      <div *ngIf="pastNotCheckedIn?.length > 0">
+        <mat-list role="list" style="margin-left:24%; margin-bottom:50px; margin-right:25%" class="mat-elevation-z8">
+          <mat-list-item role="listitem">
+            <span style="padding-left:40px;width: 37%"><b>Booker Name</b></span>
+            <span style="width: 42%"><b>Number Of People</b></span>
+            <span style="width: 27%"><b>CheckIn Status</b></span>
+          </mat-list-item>
+          <mat-accordion multi="false">
+            <mat-expansion-panel *ngFor="let past of pastNotCheckedIn">
+              <mat-expansion-panel-header>
+                <mat-panel-title style="width: 33%">
+                  <h5> <i class="fas fa-user-tie" style="margin-right:15px"></i>{{past.FirstName}} {{past.LastName}}</h5>
+                </mat-panel-title>
+                <mat-panel-title style="width: 33%">
+                  <h5> <i class="fa fa-users" style="margin-right:15px"></i> {{past.NumPeople}}</h5>
+                </mat-panel-title>
+                <mat-panel-title>
+                  <div>
+                    <h5 style="margin-right:55px"><i class="fas fa-user-times"></i></h5>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-panel-description>
+                <h6 style="padding-right:18%;">Email Id: {{past.Email}}</h6>
+                <h6 style="padding-right:30px;">Payment Method: {{past.PaymentMethod}}</h6>
+                <h6 style="padding-right:30px;">About to CheckIn Date: {{past.CheckInDate | date}}</h6>
+              </mat-panel-description>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+  <!--todays check in -->
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="material-icons" style="font-size: 35px; padding-right: 10px; ">today</i>
+      <h5> Today's Bookings</h5>
+    </ng-template>
+    <ng-template matTabContent>
+      <h3 align="center" style="padding-top:20px;">Yet to Check In</h3>
+      <div style="padding-left:87vw">
+        <a mat-raised-button routerLink="../">Back to Hotel List</a></div>
+      <!--List of today's bookings who have not been checked in the hotel provider-->
+      <div *ngIf="todayNotcheckedIn?.length > 0 ">
+        <mat-list role="list" style="margin-left:24%; margin-bottom:50px; margin-right:25%" class="mat-elevation-z8">
+          <mat-list-item role="listitem">
+            <span style="padding-left:40px;width: 37%"><b>Booker Name</b></span>
+            <span style="width: 42%"><b>Number Of People</b></span>
+            <span style="width: 27%"><b>Update Booking Status</b></span>
+          </mat-list-item>
+          <mat-accordion multi="false">
+            <mat-expansion-panel *ngFor="let checkin of todayNotcheckedIn">
+              <mat-expansion-panel-header>
+                <mat-panel-title style="width: 33%">
+                  <h5> <i class="fas fa-user-tie" style="margin-right:15px"></i>{{checkin.FirstName}} {{checkin.LastName}}</h5>
+                </mat-panel-title>
+                <mat-panel-title style="width: 33%">
+                  <h5> <i class="fa fa-users" style="margin-right:15px"></i> {{checkin.NumPeople}}</h5>
+                </mat-panel-title>
+                <mat-panel-title>
+                  <h5> <a mat-button (click)="UpdateCheckInStatus(checkin)" matTooltip="Update Check In Status for {{checkin.FirstName}}"><i style="font-size: 30px " class="material-icons">edit</i></a></h5>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-panel-description>
+                <h6 style="padding-right:18%;">Email Id: {{checkin.Email}}</h6>
+                <h6 style="padding-right:30px;">Payment Method: {{checkin.PaymentMethod}}</h6>
+              </mat-panel-description>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-list>
+      </div>
+      <div *ngIf="todayNotcheckedIn?.length == 0">
+        <mat-card [ngStyle]="{'background-color':'#157DEC'}" class="mat-elevation-z8" style="width:27%; margin-left:37%; padding-left:70px; margin-top:35px;"><i class="material-icons heading" style="font-size:40px">info</i>
+          <h5 style="    margin-top: 6px;"> No Un Checked Users Exists</h5>
+        </mat-card>
+      </div>
+
+      <br><br>
+      <hr>
+
+      <!-- today's check in -->
+      <h3 align="center" style="padding-top:20px;">Checked In</h3>
+
+      <div *ngIf="todayCheckedIn?.length == 0">
+        <mat-card [ngStyle]="{'background-color':'#157DEC'}" class="mat-elevation-z12" style="width:27%; margin-left:37%; padding-left:70px; margin-top:35px;"><i class="material-icons heading" style="font-size:40px">info</i>
+          <h5 style="    margin-top: 6px;"> No CheckIn's For Today So Far</h5>
+        </mat-card>
+      </div>
+      <div *ngIf="todayCheckedIn?.length > 0">
+        <mat-list role="list" style="margin-left:24%; margin-bottom:50px; margin-right:25%" class="mat-elevation-z8">
+          <mat-list-item role="listitem">
+            <span style="padding-left:40px;width: 37%"><b>Booker Name</b></span>
+            <span style="width: 42%"><b>Number Of People</b></span>
+            <span style="width: 27%"><b>CheckIn Status</b></span>
+          </mat-list-item>
+          <mat-accordion multi="false">
+            <mat-expansion-panel *ngFor="let checkin of todayCheckedIn">
+              <mat-expansion-panel-header>
+                <mat-panel-title style="width: 33%">
+                  <h5> <i class="fas fa-user-tie" style="margin-right:15px"></i>{{checkin.FirstName}} {{checkin.LastName}}</h5>
+                </mat-panel-title>
+                <mat-panel-title style="width: 33%">
+                  <h5> <i class="fa fa-users" style="margin-right:15px"></i> {{checkin.NumPeople}}</h5>
+                </mat-panel-title>
+                <mat-panel-title>
+                  <div *ngIf="checkin.HotelCheckINStatus">
+                    <h5 matTooltip="{{checkin.FirstName}} checked in today"><i class="fas fa-user-check"></i></h5>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-panel-description>
+                <h6 style="padding-right:18%;">Email Id: {{checkin.Email}}</h6>
+                <h6 style="padding-right:30px;">Payment Method: {{checkin.PaymentMethod}}</h6>
+              </mat-panel-description>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="material-icons" style="font-size: 35px; padding-right: 10px; ">update</i>
+      <h5> Upcoming Bookings</h5>
+    </ng-template>
+    <ng-template matTabContent>
+      <h3 align="center" style="padding-top:20px;">Upcoming Bookings</h3>
+      <div style="padding-left:87vw">
+        <a mat-raised-button routerLink="../">Back to Hotel List</a></div>
+      <!-- All future Booking Here-->
+      <div *ngIf="upcomingCheckIn?.length > 0">
+        <mat-list role="list" style="margin-left:15%; margin-bottom:50px; margin-right:20%" class="mat-elevation-z8">
+          <mat-list-item role="listitem">
+            <span style="padding-left:40px;width:25%"><b>Booker Name</b></span>
+            <span style="width: 25%"><b>Number Of People</b></span>
+            <span style="width: 25%"><b>Phone No.</b></span>
+            <span style="width: 25%"><b>Booking Date</b></span>
+          </mat-list-item>
+          <mat-accordion multi="false">
+            <mat-expansion-panel *ngFor="let checkin of upcomingCheckIn">
+              <mat-expansion-panel-header>
+                <mat-panel-title style="width: 21%">
+                  <h6> <i class="fas fa-user-tie" style="margin-right:15px"></i>{{checkin.FirstName}} {{checkin.LastName}}</h6>
+                </mat-panel-title>
+                <mat-panel-title style="width: 15%">
+                  <h6> <i class="fa fa-users" style="margin-right:15px"></i> {{checkin.NumPeople}}</h6>
+                </mat-panel-title>
+                <mat-panel-title style="width: 20%">
+                  <h6>{{checkin.PhoneNumber}}</h6>
+                </mat-panel-title>
+                <mat-panel-title>
+                  <h6>{{checkin.CheckInDate | date: 'shortDate'}}</h6>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-panel-description>
+                <h6 style="padding-right:5%;"><b>Email Id:</b> {{checkin.Email}}</h6>
+                <h6 style="padding-right:5%"><b>Transportation Provider Name:</b> {{checkin.TransportationProviderName}}</h6>
+                <h6 style="padding-right:15px;"><b>Payment Method:</b> {{checkin.PaymentMethod}}</h6>
+                <div *ngIf="!checkin.HotelCheckINStatus">
+                  <h6 align="right" matTooltip="User Not CheckedIn">Check In: <i class="fas fa-user-times"></i></h6>
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-list>
+      </div>
+      <div *ngIf="upcomingCheckIn?.length == 0">
+        <mat-card [ngStyle]="{'background-color':'#157DEC'}" class="mat-elevation-z12" style="width:27%; margin-left:37%; padding-left:70px; margin-top:5vw;"><i class="material-icons heading" style="font-size:40px">info</i>
+          <h5 style="    margin-top: 6px;"> No Upcoming Bookings</h5>
+        </mat-card>
+      </div>
+
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

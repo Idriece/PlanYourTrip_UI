@@ -1,0 +1,82 @@
+<mat-progress-bar mode="indeterminate" *ngIf="ProgressBar"></mat-progress-bar>
+<div class="list-header-title">
+    <h4 mat-dialog-title style="text-align:center">Sign Up</h4>
+</div>
+
+<form [formGroup]="registerForm">
+    <mat-vertical-stepper>
+        <mat-step label="Provide login details">
+
+            <mat-form-field>
+
+                <input type="email" matInput pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9]+\.([a-zA-Z]{2,3}|[a-zA-z]{2,3}\.[a-zA-Z]{2,2})" formControlName="Email"
+                    placeholder="Email" required />
+                <mat-error *ngIf="registerForm.controls.Email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field hintLabel="Min 8 characters">
+                <input matInput pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^+=&]).*$" formControlName="Password" placeholder="Password"
+                    [type]="hide ? 'password' : 'text'" required>
+                <mat-icon matSuffix (click)="hide = !hide">
+                    {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error *ngIf="registerForm.controls.Password.invalid">{{getErrorMessagePassword()}}</mat-error>
+
+            </mat-form-field>
+            <br>
+            <mat-form-field hintLabel="Min 8 characters">
+                <input matInput formControlName="ConfirmPassword" placeholder="Confirm Password" [type]="hide ? 'password' : 'text'" required>
+                <mat-icon matSuffix (click)="hide = !hide">
+                    {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error *ngIf="registerForm.controls.ConfirmPassword.invalid">Both password must match</mat-error>
+
+            </mat-form-field>
+        </mat-step>
+        <mat-step label="Provide user details">
+            <mat-form-field hintLabel="minimun 3 characters needed">
+                <input matInput pattern="^(?=.*[a-zA-Z].*)[a-zA-Z\d!@#$%&*]{3,30}$" formControlName="UserName" placeholder="User name" required
+                />
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-error *ngIf="registerForm.controls.UserName.invalid">{{getErrorMessageUserName()}}</mat-error>
+
+            </mat-form-field>
+            <br>
+            <mat-form-field hintLabel="minimum 3 characters needed">
+                <input matInput pattern="([a-zA-Z]{3,30}\s*)" formControlName="FirstName" placeholder="First Name" required />
+                <mat-error *ngIf="registerForm.controls.FirstName.invalid">{{getErrorMessageFirstName()}}</mat-error>
+
+            </mat-form-field>
+            <br>
+            <mat-form-field hintLabel="minimum 3 characters needed">
+                <input matInput pattern="([a-zA-Z]{3,30}\s*)" formControlName="LastName" placeholder="Last Name" required/>
+                <mat-error *ngIf="registerForm.controls.LastName.invalid">{{getErrorMessageLastName()}}</mat-error>
+
+            </mat-form-field>
+
+            <br>
+            <mat-form-field hintLabel="enter with your country code">
+                <span matPrefix>+ &nbsp;</span>
+                <input id="PhoneNumber" type="tel" pattern="^[0-9]{1,3}[0-9]{4,15}$"
+                 matInput formControlName="PhoneNumber" 
+                 #input minlength="12"
+                 maxlength="15" placeholder="Phone Number" required>
+                <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint>
+                <mat-icon matSuffix>call</mat-icon>
+                <mat-error *ngIf="registerForm.controls.PhoneNumber.invalid">{{getErrorMessagePhone()}}</mat-error>
+
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-select formControlName="CityId"   placeholder="Select a city" required>
+                    <mat-option *ngFor="let city of cities" [value]="city.CityID">
+                        {{city.CityName}}
+                    </mat-option>
+                    </mat-select>
+            </mat-form-field>
+        </mat-step>
+        <br>
+
+    </mat-vertical-stepper>
+
+    <button mat-raised-button class="register" type="submit" [disabled]="registerForm.invalid" (click)="onRegisterSubmit()">SIGN ME UP!</button>
+    <button mat-raised-button (click)="Close()" type="reset" style="margin-left:25px">Cancel</button>
+</form>

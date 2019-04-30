@@ -1,0 +1,26 @@
+<div >
+  <h3 style="text-align: center;padding:15px;">Login Here!</h3>
+  <form [formGroup]="loginForm">
+        <!-- (ngSubmit)="onSubmit()" -->
+      <i style="margin-left: 23px" class="material-icons">person</i>
+      <mat-form-field > 
+          <input matInput pattern="^(?=.*[a-zA-Z].*)[a-zA-Z\d!@#$%&*]{1,30}$" placeholder="User Name" formControlName="UserName" required>
+      </mat-form-field>
+  <br>
+  <i style="margin-left: 23px" class="material-icons">vpn_key</i>
+    <mat-form-field >
+      <input matInput type="password" formControlName="Password" placeholder="Password" required>
+    </mat-form-field>
+    <br/>
+    <button *ngIf="!isSubmit" style="margin-bottom: 10px;width: 100%" mat-raised-button color="primary" [disabled]="!loginForm.valid" type="submit" (click)="NormalLogin()">Login</button>
+    <button style="margin-bottom: 10px;width: 100%" mat-raised-button color="primary" type="reset" *ngIf="hitCancel" (click)="Cancel()">Cancel</button>
+    <mat-spinner style="margin:0 auto;" [diameter]="40" *ngIf="isProgressBar"></mat-spinner>
+    <a style="font-size: 12px;margin: 0 auto" (click)="openForgetPassword()">Forgot Password?</a>
+    <br>
+    <hr/>
+    <button *ngIf="!isGoogle" style="margin-bottom: 10px;width: 80%;margin-left:25px;font-size: 16px" mat-raised-button (click)="signInWithGoogle()"><i style="padding-right:30px" class="fab fa-google red"></i>Sign In with Google</button>
+    <mat-spinner style="margin:0 auto;" [diameter]="40" *ngIf="isGoogleProgressBar"></mat-spinner> 
+    <p style="font-size: 12px;margin-left: 150px;margin-top: 10px;">Not an User???<a style="font-size: 12px" class="toolbar-link" (click)="openSignupDialog()" ><b> Sign Up</b></a></p>
+</form> 
+</div>
+

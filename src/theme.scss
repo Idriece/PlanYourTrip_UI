@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@import './styles.scss';
+@import './app/Components/nav-bar/nav-bar.component.scss';
+@import './app/Modules/packages/view-details/view-details.component.scss';
+@import './app/Modules/home/suggested-packages/suggested-packages.component.scss';
+@import './app/Components/search-bar/search-bar.component.scss';
+@import './app/Modules/packages/package-search/package-search.component.scss';
+@import './app/Components/package-list/package-list.component.scss';
+@import './app/Modules/packages/book-package/book-package.component.scss';
+@import './app/Modules/userprofile/feedback/feedback.component.scss';
+@import './app/Modules/userprofile/bookinglist/bookinglist.component.scss';
+
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-teal, 900);
+$app-accent:  mat-palette($mat-yellow, 200);
+$app-warn:    mat-palette($mat-red);
+
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
+@include theme-color-grabber($app-theme);
+@include details-theme-color-grabber($app-theme);
+@include suggested-theme-color-grabber($app-theme);
+@include search-theme-color-grabber($app-theme);
+@include package-search-theme-color-grabber($app-theme);
+@include package-list-theme-color-grabber($app-theme);
+@include booking-theme-color-grabber($app-theme);
+@include feedback-theme-color-grabber($app-theme);
+@include bookinglist-theme-color-grabber($app-theme);

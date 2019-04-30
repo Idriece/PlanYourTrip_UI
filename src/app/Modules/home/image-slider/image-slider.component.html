@@ -1,0 +1,13 @@
+<mat-grid-list cols="1" rowHeight="100%">
+  <mat-grid-tile>
+    <button mat-button id="left-button" class="left" (click)="shiftRight()">
+      <i id="left-icon" class="material-icons">keyboard_arrow_left</i>
+    </button>
+    <mat-card class="image-slider-card">
+      <img mat-card-image [@switchImage]="state" src="{{ currentImage }}">
+    </mat-card>
+    <button mat-button id="right-button" class="right" (click)="shiftLeft()">
+      <i id="right-icon" class="material-icons">keyboard_arrow_right</i>
+    </button>          
+  </mat-grid-tile>
+</mat-grid-list>

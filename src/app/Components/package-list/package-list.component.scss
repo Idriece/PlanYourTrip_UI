@@ -1,0 +1,124 @@
+@import '~@angular/material/theming';
+
+@mixin package-list-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+  
+    body {
+        overflow-x: hidden;
+    }
+
+    .pack-image-card {
+        background-color: transparent;
+        border: none;
+    }
+
+    .header {
+        width: 50%;
+    }
+
+    .card-head {
+        height: 800px;
+    }
+
+    .package-card {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        color: black;
+    }
+
+    .pack-card-header {
+        width: 100%;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: left;
+        align-items: center;
+    }
+
+    .pack-header {
+        width: 30%;
+    }
+
+    .pack-card-content {
+        width: 65%;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: left;
+        align-items: center;
+    }
+
+    .pack-content {
+        width: 30%;
+    }
+
+    .left-tile {
+        width: 100%;
+        height: 100%;
+        padding-left: 16px;
+    }
+
+    .tile {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+    }
+
+    .pack-icon {
+        margin-left: 8px;
+    }
+
+    .pack-grid {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .pack-tile {
+        //margin-bottom: 80px;
+    }
+
+    .pack-image {
+        max-width: 90%;
+        width: 90%;
+        margin-right: 15px;
+    }
+
+    .pack-card-subtitle {
+        width: 50%;
+    }
+
+    .package-panel {
+        border-style: solid;
+        border-width: 1px;
+        border-color: rgba(0, 1, 0, 0.20);
+    }
+
+    .package-panel:hover {
+        border-color: mat-color($primary);
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .package-panel:focus-within {
+        border-color: mat-color($primary);
+        border-style: solid;
+    }
+
+    .view-button:hover {
+        color: mat-color($accent);
+    }
+
+    #summary-tile {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .package-title {
+        justify-content: flex-start;
+        justify-content: flex-start;
+    }
+}

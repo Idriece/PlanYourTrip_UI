@@ -1,0 +1,98 @@
+<h1 mat-dialog-title>Hi! Edit Hotel {{data.dataKey.HotelName}} </h1>
+<p>
+  <b> <i class="fas fa-user-tie" style="margin-right:15px"></i>: {{data.dataKey.Email}}<br/>
+    <i class="fas fa-map-marked-alt" style="margin-right:15px"></i>: {{data.dataKey.CityName}}</b>
+</p>
+<form [formGroup]="EditHotel" #editedDetail="ngForm" (ngSubmit)="HandleHotelEditFormSubmit(editedDetail)">
+
+  <mat-form-field>
+    <i matPrefix class="fas fa-hotel" style="margin-right:15px"></i>
+    <input matInput type="text" formControlName="HotelName" placeholder="Update Hotel Name">
+    <mat-error>
+      <div *ngIf="_getHotelName.invalid && _getHotelName.touched">
+        <div *ngIf="_getHotelName.errors?.minlength">
+          Name can't be less than 3 char
+        </div>
+        <div *ngIf="_getHotelName.errors?.maxlength">
+          Name can't be more than 100 char
+        </div>
+        <div *ngIf="_getHotelName.errors.pattern">
+          Please Enter a <b>Valid</b> Name
+        </div>
+        <div *ngIf="_getHotelName.errors.unique">
+          Sorry! Please enter <b>unique</b> name
+        </div>
+      </div>
+    </mat-error>
+  </mat-form-field>
+
+  <!--Standard Room Price-->
+  <div *ngIf="StandardRoomPriceCheckBox">
+    <mat-checkbox (click)="StandardRoomPriceInputVisibility()" formControlName="PriceCheckBox">Update Standard Price</mat-checkbox><br/>
+    <div *ngIf="StandardRoomPriceInput">
+      <mat-form-field>
+        <i class="fas fa-rupee-sign" matPrefix style="margin-right:15px"></i>
+        <input type="number" placeholder="Standard Room Price" matInput formControlName="StandardPrice">
+        <mat-error>
+          <div *ngIf="_getStandardPrice.invalid&&_getStandardPrice.touched">
+            <div *ngIf="_getStandardPrice.errors?.min">
+              enter price greater than 500
+            </div>
+            <div *ngIf="_getStandardPrice.errors?.max">
+              enter price less than 100000
+            </div>
+          </div>
+        </mat-error>
+        <mat-hint>greater than 500</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div *ngIf="DeluxeRoomPriceCheckBox">
+    <mat-checkbox (change)="DeluxeRoomPriceInputVisibility()">Update Deluxe Price</mat-checkbox><br/>
+    <div *ngIf="DeluxeRoomPriceInput">
+      <mat-form-field>
+        <i class="fas fa-rupee-sign" matPrefix style="margin-right:15px"></i>
+        <input type="number" placeholder="Deluxe Room Price" matInput formControlName="DeluxePrice">
+        <mat-error>
+          <div *ngIf="_getDeluxePrice.invalid&&_getDeluxePrice.touched">
+            <div *ngIf="_getDeluxePrice.errors?.min">
+              enter price greater than 700
+            </div>
+            <div *ngIf="_getDeluxePrice.errors?.max">
+              enter price less than 100000
+            </div>
+          </div>
+        </mat-error>
+        <mat-hint>greater than 700</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngIf="PremiumRoomPriceCheckBox">
+    <mat-checkbox (click)="PremiumRoomPriceInputVisibility()">Update Premium Price</mat-checkbox><br/>
+    <div *ngIf="PremiumRoomPriceInput">
+      <mat-form-field>
+        <i class="fas fa-rupee-sign" matPrefix style="margin-right:15px"></i>
+        <input type="number" placeholder="Premium Room Price" matInput formControlName="PremiumPrice">
+        <mat-error>
+          <div *ngIf="_getDeluxePrice.invalid&&_getDeluxePrice.touched">
+            <div *ngIf="_getDeluxePrice.errors?.min">
+              enter price greater than 1000
+            </div>
+            <div *ngIf="_getDeluxePrice.errors?.max">
+              enter price less than 100000
+            </div>
+          </div>
+        </mat-error>
+        <mat-hint>greater than 1000</mat-hint>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div mat-dialog-actions *ngIf="saveVisibility">
+    <button type="submit" [disabled]="checkValid()" mat-button>Save Changes</button>
+    <button mat-button type="reset" (click)="onNoClick()">No Thanks</button>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isProgressBar" ></mat-progress-bar> 
+</form>

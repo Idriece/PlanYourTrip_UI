@@ -1,0 +1,55 @@
+<div *ngIf="package">
+  <h2 id="booking-title">Book {{ package.PackageName }}</h2>
+  <form class="book-form" (submit)="bookPackage()" #bookingForm="ngForm">
+    <div>
+      <span class="row-label">When would you like to travel?</span>
+      <mat-form-field class="form-field">
+        <input #startDateInput matInput [min]="today" [max]="latest" [matDatepicker]="start" placeholder="Starting Date" 
+        [(ngModel)]="startDate" (dateChange)="updateEnd(startDateInput.value)" name="startDate" required>
+        <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+        <mat-datepicker #start></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput [matDatepicker]="end" placeholder="End Date" [(ngModel)]="endDate" name="endDate" disabled>
+        <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+        <mat-datepicker #end></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="form-field">
+        <mat-select placeholder="How Many People?" [(ngModel)]="numPeople" name="numPeople" required>
+          <mat-option *ngFor="let num of numPeopleOptions" [value]="num" required>{{ num }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox [(ngModel)]="payLater" name="payLater">I would like to pay later</mat-checkbox>
+    </div>
+    <div id="paymentInfo" *ngIf="!payLater">
+      <span class="row-label">Payment Information</span>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Credit Card #" [(ngModel)]="creditCard" name="creditCard" required pattern="[0-9]{13,19}">
+        <mat-error>Should Be 13-19 Digits</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Name on Credit Card" [(ngModel)]="creditName" name="creditName" required pattern="[a-zA-Z ',.]+">
+        <mat-error>Please Enter A Valid Name</mat-error>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!isCustomized" id="cost">
+      Hotel and Transportation Cost: {{ package.Price * numPeople | currency:'INR':true }}
+      <br>
+      Tax and Fees: {{ fees * numPeople | currency:'INR':true }}
+      <br>
+      Your total is {{ package.Price * numPeople + (fees * numPeople) | currency:'INR':true }}
+    </div>
+    <div *ngIf="isCustomized" id="cust-cost">
+        Hotel and Transportation Cost: {{ customizedPrice * numPeople | currency:'INR':true }}
+        <br>
+        Tax and Fees: {{ fees * numPeople | currency:'INR':true }}
+        <br>
+        Your total is: {{ customizedPrice * numPeople + (fees * numPeople) | currency:'INR':true }}
+    </div>
+    <div class="submit-button">
+      <button class="book-button" mat-button type="submit" [disabled]="bookingForm.form.invalid">Confirm Your Booking</button>
+    </div>
+  </form>
+</div>

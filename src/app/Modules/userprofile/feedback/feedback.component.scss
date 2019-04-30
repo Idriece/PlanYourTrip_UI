@@ -1,0 +1,84 @@
+@mixin feedback-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .review-dialog {
+        display: inline-flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .star:hover {
+        cursor: pointer;
+    }
+
+    .active {
+        color: mat-color($accent);
+    }
+
+    .review {
+        margin-top: 50px;
+        overflow-y: hidden;
+    }
+
+    .stepper {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .step-content {
+        width: 100%;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .step-button {
+        height: 64px;
+        width: 100%;
+        background-color: mat-color($primary);
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        border-radius: 2px;
+    }
+
+    #head {
+        margin-left: 24px;
+    }
+
+    #star-content {
+        height: 40px;
+    }
+
+    .material-icons.md-36 {
+        font-size: 36px;
+    }
+
+    #feedback-dialog.mat-dialog-container {
+        padding-bottom: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+
+.mat-horizontal-content-container {
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.mat-dialog-content {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}

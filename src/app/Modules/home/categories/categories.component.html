@@ -1,0 +1,8 @@
+<mat-grid-list cols="5" rowHeight="500px" colWidth="20%" gutterSize="1px">
+    <mat-grid-tile class="category-tile" *ngFor="let category of categories | slice:0:5; index as i;">
+      <div (click)="search(category)" class="hover-div" (mouseenter)="setActive()" (mouseleave)="setInactive()">
+        <div class="cat-name" [@categoryTrigger]="state">{{ category }}</div>
+      </div>
+      <img matImage class="category-image" height="100%" [src]="images[i]">
+    </mat-grid-tile>
+</mat-grid-list>

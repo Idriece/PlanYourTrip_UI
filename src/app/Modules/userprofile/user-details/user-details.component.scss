@@ -1,0 +1,84 @@
+.example-card {
+    max-width: 700px;
+    position: center;
+    flex-direction: row;
+     margin-top:5%;
+   width: 80%;
+    height: 90%;
+    align-self: auto;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgb(205, 232, 229);
+
+   
+  }
+
+  .table
+  {
+    width : 100%;
+    border-spacing: 5px 12px;
+  }
+  .td{
+    width: 100%;
+  }
+  .color1{
+    background-color: rgb(205, 232, 229);
+  }
+  .right{
+    position: right;
+    width: 60%;
+  }
+  .con1{
+    word-spacing: 30px;
+    tab-size: 4 ;
+  }
+  .container{
+    align-self: auto;
+    margin-right: auto;
+    margin-left: auto;
+    position: center;
+  }
+  .color1
+  {
+   text-decoration-color: rgb(11, 10, 10) ;
+   font-size:60px;
+  }
+  
+  .example-header-image {
+    // background-image: url('D:\Angular\planyourtripfinal1\PlanYourTrip_UI\src\assets\smile.png');
+background-size: cover;
+width: 20%;
+height: 20%;
+
+  }
+  .container1
+  {
+    text-decoration-color: black;
+    background-color:rgb(48, 156, 108);
+  }
+  .icon
+  {
+    position :left;
+  }
+  // .material-icons
+  // {
+  //   size: 50%;
+  //   position:center;
+  // }
+  // .material-icons.md-68 { font-size: 100px;
+  // position:center; }
+  .container{
+   
+    position: center; 
+     margin-top:5%;
+   width: 75%;
+    height: 70%;
+    align-self: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .material-icons{
+    left: 450px;
+    position: right;
+  
+  }

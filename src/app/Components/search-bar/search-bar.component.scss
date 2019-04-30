@@ -1,0 +1,62 @@
+@mixin search-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+      
+    // Create theme specfic styles
+
+    .search .search-field {
+        @include mat-elevation(0);
+        width: 80%;
+        background-color: none;
+        padding-right: 4px;
+        padding-left: 4px;
+        padding-bottom: 0;
+    }
+
+    .search-bar .mat-form-field-underline {
+        display: none;
+    }
+
+    .search-bar .mat-form-field-infix {
+        display: inline-flex;
+        flex-flow: row;
+        white-space: nowrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .search-bar .search-field {
+        @include mat-elevation(8);
+        width: 500px;
+        height: 60px;
+        background-color: white;
+        padding-right: 4px;
+        padding-left: 4px;
+        padding-bottom: 0;
+        border-radius: 2px;
+        border-width: 1px;
+    }
+
+    .search-bar #search-box:focus-within {
+        border-style: solid;
+        border-color: mat-color($primary);
+    }
+
+    .search-form {
+        width: 100%;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #search-input {
+        width: 80%;
+    }
+
+    #search-button {
+        width: 20%;
+    }
+}

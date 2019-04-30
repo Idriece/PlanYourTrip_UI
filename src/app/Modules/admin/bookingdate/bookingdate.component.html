@@ -1,0 +1,48 @@
+
+<div class="example-container"><br><br>
+  
+    <h3 style="text-align:center;">Booking History</h3>
+
+  <button  mat-icon-button matTooltip="Back To Admin Panel"><a routerLink="../"><i style="font-size: 40px; " class="material-icons">navigate_before</i></a></button>
+        
+        &nbsp;&nbsp;
+  <input matInput  [matDatepicker]="dp3" placeholder="Start Date" disabled [(ngModel)]="SDate" >
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker> 
+       <i class="material-icons">
+          compare_arrows
+          </i> 
+           <input matInput  [matDatepicker]="dpl3" placeholder="End Date" disabled [(ngModel)]="EDate">
+          <mat-datepicker-toggle matSuffix [for]="dpl3"></mat-datepicker-toggle>
+          <mat-datepicker #dpl3 disabled="false"></mat-datepicker>     
+<button mat-raised-button color="warn" (click)="search()">Search</button>
+</div>
+
+<div class="container">
+ <mat-list role="list">
+  
+    <mat-list-item role="listitem">
+      
+      <span style="margin-left:1px;width: 30%"><b>User Name</b></span>
+      <span style="margin-left:1px;width: 30%"><b>Package Name</b></span>
+      
+      <span style="margin-left:0px;width: 30%"><b>Package Type</b></span>
+      <span style="margin-left:0px;width: 30%"><b>Total Cost</b></span>
+    </mat-list-item>
+    <div *ngFor="let array of Array;index as i">
+    <mat-list-item role="listitem" >
+      <!-- <span style="width: 30%">{{Array.UserName}}</span> -->
+      
+      <span style="width: 30%">{{array.UserName}}</span>
+      <span style="width: 30%">{{array.PackageName}}</span>
+      <!-- <span style="width: 30%">{{array.PaymentMethod}}</span> -->
+      <!-- <span style="width: 10%">{{array.NumberOfTrips}}</span> -->
+      <span style="width: 30%">{{array.PackageType}}</span>
+      <span style="width: 30%">{{array.TotalPackageCost | currency:'INR':true}}</span>
+    </mat-list-item>
+  
+  </div>
+  
+  </mat-list> 
+
+</div>

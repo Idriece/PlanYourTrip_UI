@@ -1,0 +1,16 @@
+<div id="test" class="test">
+  <button id="left" mat-fab (click)="shiftLeft()"><i class="material-icons icon-button">keyboard_arrow_left</i></button>
+  <div id="scroll" class="suggested" [@shiftLeftRight]="shift">
+    <mat-card (mouseleave)="unhoverCard()" (mouseenter)="hoverCard()" *ngFor="let package of packages" class="home-card" routerLink="/packages/package/{{package.PackageID}}">
+      <div [@homeCardTrigger]="state" class="home-card-title">
+        <h3>{{ package.PackageName }}</h3>
+        <i class="material-icons md-36" *ngFor="let star of stars; index as i;" [ngClass]="{'active': stars[i] <= package.Rating}">star</i>        
+      </div>
+      <img class="suggested-image" mat-card-image src="{{ package.Image }}">
+      <mat-card-content class="stars">
+        Rating: <i class="material-icons" *ngFor="let star of stars; index as i;" [ngClass]="{'active': stars[i] <= package.Rating}">star</i>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <button id="right" mat-fab (click)="shiftRight()"><i class="material-icons icon-button">keyboard_arrow_right</i></button>
+</div>

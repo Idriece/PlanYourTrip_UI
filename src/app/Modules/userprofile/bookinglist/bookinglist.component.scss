@@ -1,0 +1,14 @@
+@mixin bookinglist-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .feedback-button {
+        margin-right: 8px !important;
+    }
+
+    .feedback-button:hover {
+        color: mat-color($accent);
+    }
+}

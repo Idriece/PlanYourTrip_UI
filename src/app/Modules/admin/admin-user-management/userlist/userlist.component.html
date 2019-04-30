@@ -1,0 +1,44 @@
+<mat-progress-bar color="warn" mode="query" *ngIf="wait"></mat-progress-bar>
+<mat-list role="list">
+  <mat-list-item role="listitem">
+    <span style="margin-left:30px;width: 25%"><b>Name</b></span>
+    <span style="width: 25%"><b>Email</b></span>
+    <span style="width: 25%"><b>Login Provider</b></span>
+    <span style="width: 25%"><b>User Name</b></span>
+  </mat-list-item>
+  <mat-accordion multi="false" *ngFor="let array of Array">
+<mat-expansion-panel *ngIf="array.Role=='NormalUser'">
+  <mat-expansion-panel-header>
+    
+    <mat-panel-title style="width: 25%"><i class="material-icons">perm_identity</i>
+      {{array.FirstName}}{{array.LastName}}
+    </mat-panel-title>
+    
+    <mat-panel-title style="width: 25%"><i class="material-icons">mail</i>
+      {{array.Email}}
+    </mat-panel-title>
+    <mat-panel-description style="width: 25%"><i class="material-icons">supervised_user_circle</i>
+      {{array.LoginProvider}}
+    </mat-panel-description>
+    <mat-panel-description style="width: 25%"><i class="material-icons">account_circle</i>
+      {{array.UserName}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+<mat-list-item>
+  <div style="width: 33%"><b>Number Of Trips : </b><span>{{array.NumberOfTrips}}</span></div>
+  <div style="width: 33%"><b>City : </b><span>{{array.City}}</span></div>
+  <div style="width: 33%"><b>State : </b><span>{{array.State}}</span></div>
+  <mat-divider></mat-divider>
+</mat-list-item>
+<!--<mat-list-item>
+    <div><mat-chip-list><b>Interests  </b><mat-chip color="accent" selected *ngFor="let interest of array.Interests">{{interest.UserInterest}}</mat-chip></mat-chip-list></div>
+    <mat-divider></mat-divider>
+</mat-list-item>
+<mat-list-item>
+    <div><mat-chip-list><b>Packages  </b><mat-chip color="accent" selected *ngFor="let packages of array.Packages">{{packages.PackageName}}</mat-chip></mat-chip-list></div>
+</mat-list-item>
+<mat-list-item>
+    <div><mat-chip-list><b>PackageType  </b><mat-chip color="accent" selected *ngFor="let packagetype of array.PackageType"> {{packagetype.PackageTypes}}</mat-chip></mat-chip-list></div>
+</mat-list-item>-->
+</mat-expansion-panel>
+</mat-accordion>

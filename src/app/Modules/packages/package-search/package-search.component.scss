@@ -1,0 +1,52 @@
+@mixin package-search-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+  
+    // Create theme specfic styles
+
+    .search {
+        @include mat-elevation(0);
+        width: 80%;
+        background-color: none;
+        padding-right: 4px;
+        padding-left: 4px;
+        padding-bottom: 0;
+    }
+
+    .package-list {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    #search-container {
+        display: flex;
+    }
+
+    #filters {
+        flex-grow: 0;
+        align-self: flex-start;
+        margin: 1em;
+        border: thin solid black;
+    }
+
+    #results {
+        flex-grow: 1;
+        margin: 1em;
+    }
+
+    .filter {
+        margin: 1em;
+    }
+
+    mat-form-field {
+        padding: 0.2em 0.5em;
+        width: 200px;
+    }
+
+    #progress-spinner {
+        margin-left: 50%;
+        margin-top: 20%;
+    }
+}

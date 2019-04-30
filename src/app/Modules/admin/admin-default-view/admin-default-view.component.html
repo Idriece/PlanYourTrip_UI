@@ -1,0 +1,97 @@
+
+<mat-grid-list cols="2" rowHeight="230px">
+
+<mat-grid-tile>
+      <mat-card  class="matcard">
+          <i class="material-icons">person</i>
+        <mat-card-title>Manage User</mat-card-title>
+        <mat-card-content>
+          {{Array[0].UserCount}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" routerLink="user">Manage</button>
+        </mat-card-actions>
+      </mat-card>
+</mat-grid-tile>
+
+<mat-grid-tile>
+    <mat-card  class="matcard">
+        <i class="material-icons">beach_access</i>
+      <mat-card-title>Manage Package</mat-card-title>
+      <mat-card-content>
+          {{Array[0].PackageCount}}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" routerLink="package">Manage</button>
+      </mat-card-actions>
+    </mat-card>
+</mat-grid-tile>
+
+<mat-grid-tile>
+    <mat-card  class="matcard">
+        <i class="material-icons">location_city</i>
+      <mat-card-title>Manage Hotel</mat-card-title>
+      <mat-card-content>
+          {{Array[0].HotelCount}}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" routerLink="hotel">Manage</button>
+      </mat-card-actions>
+    </mat-card>
+</mat-grid-tile>
+
+<mat-grid-tile>
+    <mat-card  class="matcard">
+        <i class="material-icons">drive_eta</i>
+      <mat-card-title>Manage Transportation</mat-card-title>
+      <mat-card-content>
+          {{Array[0].TransportationCount}}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" routerLink="trans">Manage</button>
+      </mat-card-actions>
+    </mat-card>
+</mat-grid-tile>
+
+<mat-grid-tile colspan="2">
+    <mat-card  class="matcard">
+        <i class="material-icons">event_note</i>
+      <mat-card-title>Manage Booking</mat-card-title>
+      <mat-card-content>
+          {{Array[0].BookingCount}}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" routerLink="bookingdate">Manage</button>
+      </mat-card-actions>
+    </mat-card>
+</mat-grid-tile>
+<mat-grid-tile>
+  <mat-card>
+    <mat-progress-spinner style="left:45%;position:absolute"
+    class="example-margin"
+    [color]="color"
+    [mode]="mode"
+    [value]="value1">
+    </mat-progress-spinner>
+    <mat-card-title style="top:25%;left:50%;position:absolute">{{Array[0].AverageProfit | number:'2.1-1'}}%</mat-card-title>
+    <mat-card-title style="top:60%;left:35%;position:absolute">Profit Percentage:{{Array[0].AverageProfit| number:'2.1-3'}}%</mat-card-title>
+    </mat-card>
+</mat-grid-tile>
+
+<mat-grid-tile>
+  <mat-card>
+    <mat-progress-spinner style="left:45%;position:absolute"
+    class="example-margin"
+    [color]="color"
+    [mode]="mode"
+    [value]="value2">
+    </mat-progress-spinner>
+    <mat-card-title style="top:25%;left:47%;position:absolute">{{Array[0].TotalPrice}}/-  </mat-card-title>
+    <mat-card-title  style="top:60%;left:45%;position:absolute">Total Price</mat-card-title>
+    </mat-card>
+</mat-grid-tile>
+
+</mat-grid-list>
+
+
+<router-outlet></router-outlet>

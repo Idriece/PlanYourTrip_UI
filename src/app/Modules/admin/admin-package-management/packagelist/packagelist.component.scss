@@ -1,0 +1,23 @@
+.div{
+  width: 100%;
+display: inline-flex;
+flex-flow: row;
+justify-content: center;
+align-items: center;
+}
+
+.table{
+  width: 100%;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+
+.button{
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+

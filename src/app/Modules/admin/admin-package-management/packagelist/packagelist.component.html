@@ -1,0 +1,31 @@
+<div class="button" style="margin-left:40%;">
+  <button mat-raised-button (click)="AllPackage()" matTooltip="View All Packages">View All<i style="font-size: 20px" class="material-icons">undo</i></button>
+  <button mat-raised-button color="warn" (click)="unAvailable()" matTooltip="View Unavailable Packages">UnAvaliable Package<i class="material-icons">sort</i></button>
+</div>
+<div class="div">
+  <table matSort *ngIf="packagelist" (matSortChange)="sortData($event)" class="table">
+    <tr>
+      <th mat-sort-header="packagename">Package Name</th>
+      <th mat-sort-header="packagetype">Package Type</th>
+      <th mat-sort-header="days">Number of Days</th>
+      <th mat-sort-header="price">Price</th>
+      <th mat-sort-header="minimumpeople">Minimum People</th>
+      <th mat-sort-header="maximumpeople">Maximum People</th>
+      <th mat-sort-header="numberavailable">Number Available</th>
+      <th mat-sort-header="profitpercentage">Profit Percentage</th>
+      <th>Edit Package</th>
+    </tr>
+
+    <tr *ngFor="let dessert of sortedData">
+      <td>{{dessert.PackageName}}</td>
+      <td>{{dessert.PackageType.Name}}</td>
+      <td>{{dessert.Days}}</td>
+      <td>{{dessert.Price | currency:'INR':'symbol':'1.0-0'}}</td>
+      <td>{{dessert.MinPeople}}</td>
+      <td>{{dessert.MaxPeople}}</td>
+      <td>{{dessert.NumberAvailable}}</td>
+      <td>{{dessert.ProfitPercentage}}%</td>
+      <td> <a mat-button (click)="openDialog(dessert.PackageID)" matTooltip="Edit Package"><i class="fas fa-edit fa-2x"></i></a></td>
+    </tr>
+  </table>
+</div>

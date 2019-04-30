@@ -1,0 +1,26 @@
+<h2 id="head" mat-dialog-title>Feedback</h2>
+<mat-dialog-content class="feedback-content" style="height: 100%">
+<mat-horizontal-stepper class="feedback-content" id="stepper" linear>
+  <mat-step class="stepper" [completed]="isRated">
+    <ng-template matStepLabel>Rate Your Trip</ng-template>
+    <div id="star-content" class="step-content" (mouseleave)="setInactive()">
+      <i class="material-icons md-36 star" *ngFor="let star of stars; index as i;" [ngClass]="star.class" (click)="setRating(i)" (mouseover)="changeClass(i)">star</i>
+    </div>
+    <div class="step-button">
+      <button [disabled]="!rating" color="accent" mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step class="stepper" [completed]="review">
+    <ng-template matStepLabel>Write a Review</ng-template>
+    <div class="step-content">        
+      <mat-form-field>
+        <textarea style="overflow:hidden" class="review" matInput cdkTextareaAutosize placeholder="Review" [(ngModel)]="review"></textarea>  
+      </mat-form-field>
+    </div>
+    <div class="step-button">
+      <button [disabled]="!review" color="accent" mat-button matDialogClose (click)="submit()">Submit</button>
+    </div>          
+  </mat-step>
+</mat-horizontal-stepper>
+</mat-dialog-content>
+

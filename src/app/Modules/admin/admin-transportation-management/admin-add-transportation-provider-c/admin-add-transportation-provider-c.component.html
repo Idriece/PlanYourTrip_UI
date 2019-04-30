@@ -1,0 +1,142 @@
+<h2 mat-dialog-title>Hi! Add New Transportation Partner</h2>
+<form [formGroup]="TransportationCreation" #Transport="ngForm" (ngSubmit)="HandleTransportFormSubmit(Transport)">
+  <mat-vertical-stepper>
+    <mat-step label="Add Transport Provider Name">
+      <mat-form-field>
+        <input matInput type="text" formControlName="TransportProviderName" placeholder="Enter Transportation Provider Name">
+        <mat-error>
+          <div *ngIf="_getTProviderName.invalid && _getTProviderName.touched">
+            <div *ngIf="_getTProviderName.errors.pattern">
+              Please Enter a Valid Name
+            </div>
+            <div *ngIf="_getTProviderName.errors.required">
+              Transportation Provider's Name can't be Empty
+            </div>
+            <div *ngIf="_getTProviderName.errors.unique">
+              Please enter unique name
+            </div>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </mat-step>
+    <mat-step label="Add Transportation Provider City">
+      <mat-form-field>
+        <mat-select placeholder="Select Transportation Provider city" formControlName="CityID" required>
+          <mat-option *ngFor="let option of cities" [value]="option.CityName">
+            {{option.CityName}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <div *ngIf="_getCity.invalid && _getCity.touched">
+            <div *ngIf="_getCity.errors.required">
+              Transportation Provider's City can't be Empty
+            </div>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </mat-step>
+    <mat-step label="Add Transportation Owner Email">
+      <mat-form-field>
+        <mat-select placeholder="Select Transportation Owner" formControlName="UserID" required>
+          <mat-option *ngFor="let option of users" [value]="option.Email">
+            {{option.Email}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <div *ngIf="_getUser.invalid && _getUser.touched">
+            <div *ngIf="_getUser.errors.required">
+              Transportation Provider's Email can't be Empty
+            </div>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </mat-step>
+    <mat-step label="Add Price">
+      <!--Car Price-->
+      <div>
+        <mat-checkbox (click)="CarInputVisibility()" formControlName="PriceCheckBox">Add Car</mat-checkbox><br/>
+        <div *ngIf="CarPricePriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="Car Price" matInput formControlName="CarPrice">
+            <mat-error>
+              <div *ngIf="_CarPrice.invalid && _CarPrice.touched">
+                <div *ngIf="_CarPrice.errors?.min">
+                  enter price greater than 500
+                </div>
+                <div *ngIf="_CarPrice.errors?.max">
+                  enter price less than 100000
+                </div>
+              </div>
+            </mat-error>
+            <mat-hint>greater than 500</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <mat-checkbox (change)="SUVPriceInputVisibility()">Add SUV</mat-checkbox><br/>
+        <div *ngIf="SUVRoomPriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="SUV Room Price" matInput formControlName="SUVPrice">
+            <mat-error>
+              <div *ngIf="_SUVPrice.invalid && _SUVPrice.touched">
+                <div *ngIf="_SUVPrice.errors?.min">
+                  enter price greater than 1000
+                </div>
+                <div *ngIf="_SUVPrice.errors?.max">
+                  enter price less than 100000
+                </div>
+              </div>
+            </mat-error>
+            <mat-hint>greater than 1000</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <!--Traveller 12 Room Price-->
+      <div>
+        <mat-checkbox (click)="Traveller12PriceInputVisibility()">Add Traveller-12</mat-checkbox><br/>
+        <div *ngIf="Traveller12PriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="Premium Room Price" matInput formControlName="Traveller12Price">
+            <mat-error>
+              <div *ngIf="_T12Price.invalid && _T12Price.touched">
+                <div *ngIf="_T12Price.errors?.min">
+                  enter price greater than 400
+                </div>
+                <div *ngIf="_T12Price.errors?.max">
+                  enter price less than 100000
+                </div>
+
+              </div>
+            </mat-error>
+            <mat-hint>Price/Per Person(min:400)</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <!--Traveller 16 Room Price-->
+      <div>
+        <mat-checkbox (click)="Traveller16PriceInputVisibility()">Add Traveller-16r</mat-checkbox><br/>
+        <div *ngIf="Traveller16RoomPriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="Traveller 16 seater" matInput formControlName="Traveller16Price">
+            <mat-error>
+              <div *ngIf="_T16Price.invalid && _T16Price.touched">
+                <div *ngIf="_T16Price.errors?.min">
+                  enter price greater than 400
+                </div>
+                <div *ngIf="_T16Price.errors?.max">
+                  enter price less than 100000
+                </div>
+              </div>
+            </mat-error>
+            <mat-hint>Price/Per Person(min:500)</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  <div mat-dialog-actions *ngIf="saveVisibility">
+    <button type="submit" [disabled]="checkValid()" mat-button>Save Changes</button>
+    <button type="reset" (click)="onNoClick()" mat-button>Discard</button>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isProgressBar" ></mat-progress-bar> 
+</form>

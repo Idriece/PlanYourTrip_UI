@@ -1,0 +1,165 @@
+<mat-progress-bar mode="indeterminate" *ngIf="isProgress" ></mat-progress-bar> 
+<div class="head-container">
+    <h3 style="text-align:center;">Create Package</h3>
+    <button mat-icon-button matTooltip="Back To Package List"><a routerLink="../"><i style="font-size: 40px " class="material-icons">navigate_before</i></a></button>
+
+    <form [formGroup]="packageForm">
+        <mat-horizontal-stepper>
+            <mat-step completed="false">
+                <ng-template matStepLabel>Package Basic Details</ng-template>
+                <div class="form-div">
+                    <mat-form-field>
+                        <mat-select placeholder="Select Package Type" formControlName="packagetypeid" required>
+                            <mat-option *ngFor="let packagetype of packagetypelist" [value]="packagetype.PackageTypeID">{{packagetype.Name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="text" formControlName="packageName" placeholder="PackageName" required>
+                        <mat-error>
+                            <div *ngIf="function.packageName.invalid && function.packageName.touched">
+                                <div *ngIf="_packagename.errors.unique">
+                                    Enter <strong>Unique</strong> Package Name
+                                </div>
+                                <div *ngIf="_packagename.errors.pattern">
+                                    Enter Valid Name
+                                </div>
+                            </div>
+
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="days" (change)="addItinerary()" placeholder="Days" required>
+                        <mat-hint align="end">Days cannot be greater than 7</mat-hint>
+                        <mat-error *ngIf="function.days.invalid && function.days.touched">
+                            Enter days less than 7
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="numAvailable" placeholder="NumberAvailable" required>
+                        <mat-hint align="end">Number Available 1-20</mat-hint>
+                        <mat-error *ngIf="function.numAvailable.invalid && function.numAvailable.touched">
+                            Invalid
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="minimumPeople" placeholder="MinimumPeople" required>
+                        <mat-hint align="end">Minimum People 1-14</mat-hint>
+                        <mat-error *ngIf="function.minimumPeople.invalid && function.minimumPeople.touched">
+                            Invalid
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="maximumPeople" placeholder="MaximumPeople" required>
+                        <mat-hint align="end">Maximum People 1-15</mat-hint>
+                        <mat-error *ngIf="function.maximumPeople.invalid && function.maximumPeople.touched">
+                            <div *ngIf="max.errors.isError">
+                                Minimum is greater than Maximum
+                            </div>
+                            Invalid
+                        </mat-error>
+                    </mat-form-field>
+
+                    <br>
+
+                    <mat-form-field class="matfield">
+                        <textarea matInput formControlName="summary" placeholder="Summary" required></textarea>
+                        <mat-hint align="end">Proper Summary</mat-hint>
+                        <mat-error *ngIf="function.summary.invalid && function.summary.touched">
+                            Invalid
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <button type="button" mat-raised-button color="primary" matStepperNext>Upload Image</button>
+                </div>
+            </mat-step>
+
+            <mat-step>
+                    <ng-template matStepLabel><strong>Upload Image</strong></ng-template>
+                <div class="image-div">
+                    <img [src]="imageUrl" style="width:450px;height:300px">
+                    <br>
+                    <label for="image"><strong>Select Package Image</strong></label>
+                    <br>
+                    <input type="file" id="image" formControlName="Image" (change)="handleFileInput($event.target.files)" placeholder="ImageUpload">
+                   <br>
+                   <br>
+                    <button type="button" mat-raised-button color="primary" matStepperNext>Fill Itinerary</button>
+                </div>
+               
+            </mat-step>
+
+            <!-- Itinerary -->
+
+            <mat-step formArrayName="itineraries" *ngFor="let itinerary of itinerarie['controls'];let i=index">
+                <ng-template matStepLabel><strong>Day{{i+1}}</strong> Details</ng-template>
+                <div [formGroupName]="i" class="form-array-div">
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="day" placeholder="Day" readonly>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Select City" formControlName="city">
+                                <mat-option *ngFor="let city of citylist" [value]="city.CityID" (click)="filterHotel(city.CityID,i);filterTransportation(city.CityID,i)">{{city.CityName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Select Hotel" formControlName="hotel">
+                                <mat-option *ngFor="let selectHotel of filteredhotellist[i]" [value]="selectHotel.HotelID" (click)="filterRoom(selectHotel.HotelID,i)">{{selectHotel.HotelName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <mat-select placeholder="Select Room Type" formControlName="RoomPriceID">
+                                <mat-option *ngFor="let item of filteredroomlist[i]" [value]="item.RoomPriceID" required>{{item.RoomTypeName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Select Transportation" formControlName="transportation">
+                                <mat-option *ngFor="let trans of filteredtransportationlist[i]" [value]="trans.TransportationProviderID" (click)="filterTransportationmode(trans.TransportationProviderID,i)">{{trans.TransportationProviderName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Select Transportation Type" formControlName="TransportationPriceID">
+                                <mat-option *ngFor="let item of filteredtransportationmodelist[i]" [value]="item.TransportationPriceID">{{item.Name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="matfield">
+                            <textarea matInput type="text" class="textarea" formControlName="activity" placeholder="Activity"></textarea>
+                        </mat-form-field>
+                        <br>
+                        <button mat-raised-button color="primary" type="button" matStepperNext>Next</button>
+                    </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Calculate Price</ng-template>
+                <div class="form-div">
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="profitPercentage" placeholder="ProfitPercentage" required>
+                        <mat-hint align="end">Profit Percentage 1-100</mat-hint>
+                        <mat-error *ngIf="function.profitPercentage.invalid && function.profitPercentage.touched">
+                            Invalid
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <input matInput type="number" formControlName="Price" readonly placeholder="Package Price" required>
+                        <mat-hint align="end">Price</mat-hint>
+                        <mat-error *ngIf="function.Price.invalid && function.Price.touched">
+                            Invalid
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button color="primary" [disabled]="!profit.valid" (click)="packageTotalPrice()">Calculate Price</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+        <div class="submit-button" *ngIf="disable" >
+            <button type="submit" [disabled]="!packageForm.valid" (click)="onSubmit(packageForm.value)" color="primary" mat-raised-button style="min-width: 350px;min-height: 25px;">Create</button>
+        </div>
+    </form>
+</div>

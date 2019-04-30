@@ -1,0 +1,121 @@
+<h2 mat-dialog-title>Hi! Add Hotel</h2>
+<form [formGroup]="HotelCreation" #hotel="ngForm" (ngSubmit)="HandleHotelFormSubmit(hotel)">
+    <mat-vertical-stepper>
+
+    <mat-step label="Add Hotel Name" [optional]="false">
+        <mat-form-field>
+                <i matPrefix class="fas fa-user-tie" style="margin-right:15px"></i>
+            <input matInput type="text" formControlName="HotelName" required placeholder="Enter Hotel Name">
+            <mat-error>
+            <div *ngIf="_getHotelName.invalid && _getHotelName.touched">
+                <div *ngIf="_getHotelName.errors.required">
+                    Hotel Name can't be Empty
+                </div>
+                <div *ngIf="_getHotelName.errors.pattern">
+                    Please Enter a Valid Name
+                </div>
+                <div *ngIf="_getHotelName.errors.unique">
+                       Sorry! Enter a unique name
+                </div>
+            </div>
+            </mat-error>
+        </mat-form-field>
+    </mat-step>
+
+    <mat-step label="Add Hotel City" [optional]="false">
+        <mat-form-field>
+                <i matPrefix class="fas fa-map-marked-alt" style="margin-right:15px"></i>
+            <mat-select  placeholder="Select hotel city" formControlName="CityID" required>
+                <mat-option *ngFor="let option of cities" [value]="option.CityName">
+                  {{option.CityName}}
+                </mat-option>
+            </mat-select>    
+            <mat-error>
+                <div *ngIf="_getCity.invalid&&_getCity.touched">
+                    <div *ngIf="_getCity.errors.required">
+                        Please provide a city
+                    </div>
+                </div>
+            </mat-error>
+          </mat-form-field>
+    </mat-step>
+
+    <mat-step label="Add Hotel Owner Email" [optional]="false">
+        <mat-form-field>
+            <i class="fas fa-user-tie" matPrefix style="margin-right:15px"></i>
+            <mat-select placeholder="Select hotel Owner"  formControlName="UserID"  required>
+                <mat-option *ngFor="let option of users" [value]="option.Email">
+                  {{option.Email}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                    <div *ngIf="AvailableOwners()">
+                        Please Register Associated Owner
+                    </div>
+                    <div *ngIf="_getUser.invalid&&_getUser.touched">
+                        <div *ngIf="_getUser.errors.required && !AvailableOwners()">
+                            Please provide a Owner
+                        </div>
+                    </div>
+                </mat-error>
+          </mat-form-field>          
+    </mat-step>
+    <mat-step label="Add Hotel Image">
+        <input type="file" id="image" formControlName="Image" accept="Image/*" (change)="handleFileInput($event.target.files)" placeholder="Select An Image">
+    </mat-step>
+    <mat-step label="Add Price" [optional]="false">
+            <!--Standard Room Price-->
+  <div *ngIf="StandardRoomPriceCheckBox">
+   <mat-checkbox (click)="StandardRoomPriceInputVisibility()" formControlName="PriceCheckBox"  >Add Standard Price</mat-checkbox><br/>
+   <div *ngIf="StandardRoomPriceInput">
+          <mat-form-field>
+                <i class="fas fa-rupee-sign" matPrefix style="margin-right:15px"></i>
+            <input type="number" placeholder="Standard Room Price"  matInput formControlName="StandardPrice">
+            <mat-error>
+                    <div *ngIf="_standarrdPrice.invalid&&_standarrdPrice.touched">
+                        <div *ngIf="_standarrdPrice.errors?.min">
+                            enter price greater than 500
+                        </div>
+                        <div *ngIf="_standarrdPrice.errors?.max">
+                                enter price less than 100000
+                        </div>
+                    </div>
+                </mat-error>
+            <mat-hint>greater than 500</mat-hint>
+          </mat-form-field>
+    </div>
+  </div>
+     
+        <!--Deluxe Room Price-->
+        <div *ngIf="DeluxeRoomPriceCheckBox">
+        <mat-checkbox (change)="DeluxeRoomPriceInputVisibility()">Add Deluxe Price</mat-checkbox><br/>
+        <div *ngIf="DeluxeRoomPriceInput">
+            <mat-form-field>
+                    <i class="fas fa-rupee-sign" matPrefix style="margin-right:15px"></i>
+              <input type="number" placeholder="Deluxe Room Price"  matInput formControlName="DeluxePrice">
+              <mat-hint>greater than 700</mat-hint>
+            </mat-form-field>
+            <!-- <button mat-button (click)="DeluxeRoomPriceOuterDivVisibility()">Add This Price</button> -->
+        </div>
+        </div>
+        <!--Premium Room Price-->
+        <div *ngIf="PremiumRoomPriceCheckBox">
+        <mat-checkbox (click)="PremiumRoomPriceInputVisibility()">Add Premium Price</mat-checkbox><br/>
+        <div *ngIf="PremiumRoomPriceInput">
+            <mat-form-field>
+                    <i class="fas fa-rupee-sign" matPrefix style="margin-right:15px"></i>
+              <input type="number" placeholder="Premium Room Price"  matInput formControlName="PremiumPrice">
+              <mat-hint>greater than 1000</mat-hint>
+            </mat-form-field>
+            <!-- <button mat-button (click)="PremiumRoomPriceOuterDivVisibility()">Add This Price</button> -->
+        </div>
+        </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  <div mat-dialog-actions *ngIf="saveVisibility">
+      <button type="submit" [disabled]="checkValid()" mat-button >Save Changes</button>
+      <button type="reset" (click)="onNoClick()"  mat-button >Discard</button>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isProgressBar" ></mat-progress-bar> 
+
+</form>

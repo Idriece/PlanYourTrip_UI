@@ -1,0 +1,18 @@
+<mat-progress-bar mode="indeterminate" *ngIf="isProgress"></mat-progress-bar>
+<mat-grid-list cols="4" rowHeight="50px" ng-class="gridList">
+  <mat-grid-tile>
+    <button mat-icon-button matTooltip="Back To Admin Panel"><a routerLink="../../"><i style="font-size: 40px " class="material-icons">navigate_before</i></a></button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <h3 style="justify-content: left;">Package List</h3>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-button mat-icon-button routerLink="createpackage" id="createpackage" style="margin-right:10px!important" matTooltip="Create Package"><i style="font-size: 40px " class="material-icons" >add_circle</i></button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-button mat-icon-button (click)="openDialog()" style="margin-right:10px!important" matTooltip="Add Package Type"><i style="font-size: 40px " class="material-icons" >add_circle</i></button>
+  </mat-grid-tile>
+</mat-grid-list>
+<hr/>
+<!-- Package List Display-->
+<app-packagelist></app-packagelist>

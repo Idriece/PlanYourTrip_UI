@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Confirm CheckIn For {{data.dataKey.FirstName}} {{data.dataKey.LastName}} </h1>
+<h6><i class="fas fa-at" style="margin-right:16px"></i> <b>Email: </b>{{data.dataKey.Email}}</h6>
+<h6><i class="fas fa-credit-card" style="margin-right:16px"></i> <b>Payment Method: </b>{{data.dataKey.PaymentMethod}}</h6>
+<h6><i class="fa fa-users" style="margin-right:15px"></i> <b>Number of People: </b>{{data.dataKey.NumPeople}}</h6>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="updateCheckInStatus()" ><i class="fas fa-check" style="margin-right:10px"></i>Confirm</button>
+    <button mat-button  (click)="onNoClick()" style="margin-left:20px;"><i class="fas fa-times" style="margin-right:10px;"></i>Discard</button>
+  </div>
+

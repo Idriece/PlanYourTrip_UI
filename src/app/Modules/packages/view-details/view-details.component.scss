@@ -1,0 +1,222 @@
+@mixin details-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    
+    .view-details {
+        width: 100%;
+        padding-top: 24px;
+    }
+
+    .book {
+        height: 100%;
+        width: 100%;
+        margin-top: 5%;
+        margin-bottom: 2%;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+    }
+    #book-button, #customize-button, #cancel-button, #wishlist-add-button, #wishlist-remove-button {
+        height: 50px;
+        width: 21%;
+        padding: 4px 4px 4px 4px;
+    }
+
+    #wishlist-remove-button {
+        font-size: 11px;
+    }
+
+    #book-button {
+        background-color: #B81E1E;
+    }
+
+    #book-button:hover, #customize-button:hover, #cancel-button:hover, #wishlist-add-button:hover, #wishlist-remove-button:hover {
+        color: mat-color($accent);
+    }
+
+    .hotel-tile {
+        flex-flow: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .feedback-accordion {
+        margin-top: 20%;
+    }
+
+    .feed-header {
+        margin-top: 5%;
+        margin-left: 24px;
+    }
+
+    .feedback-panel {
+        margin-top: 2%;
+        margin-bottom: 80px;
+    }
+
+    .feedback-tile {
+        margin-top: 5%;
+        flex-flow: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .left {
+        width: 100%;
+        height: 100%;
+        text-align: left;
+        display: inline-flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .right {
+        width: 100%;
+        height: 100%;
+        text-align: right;
+        display: inline-flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+    .center {
+        width: 100%;
+        height: 100%;
+        text-align: left;
+        display: inline-flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .center-rating {
+        width: 100%;
+        height: 100%;
+        text-align: left;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .review {
+        height: 100%;
+        width: 100%;
+        text-align: left;
+        display: inline-flex;
+        justify-content: flex-start;
+        align-content: flex-start;
+    }
+
+    .itinerary {
+        width: 100%;
+        height: 100%;
+    }
+
+    i {
+        color: rgba(0, 0, 0, 0.40);
+    }
+
+    .active {
+        color: mat-color($accent);
+    }
+
+    .detail-image-card {
+        background-color: transparent;
+        border: none;
+    }
+
+
+    .left-tile {
+        width: 100%;
+        height: 100%;
+        padding-left: 16px;
+    }
+
+    .detail-tile {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+    }
+
+    .detail-icon {
+        margin-left: 8px;
+    }
+
+    .grid {
+        padding-left: 24px;
+    }
+
+    .detail-image {
+        max-width: 90%;
+        width: 90%;
+        margin-right: 15px;
+    }
+
+    .detail-grid {
+        padding-left: 24px;
+    }
+
+    .bottom-bar {
+        width: 100%;
+        height: 80px;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .bottom-bar-sheet {
+        @include mat-elevation(8);
+        width: 48%;
+        height: 100%;
+        min-width: 350px;
+        display: inline-flex;
+        flex-flow: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        background-color: rgb(36, 36, 36);
+        border-radius: 4px;
+        color: white;
+    }
+
+    #title {
+        height: 24px !important;
+    }
+
+    .progress {
+        height: 12px !important;
+        width: 60% !important;
+    }
+
+    .review {
+        color: black;
+    }
+
+    #detail-summary-tile {
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow-y: scroll;
+    }
+
+    mat-progress-bar.progress {
+        background-color: #D9D9D9;
+        .mat-progress-bar-fill::after {
+            background-color: #DCDCDC;
+        }
+    
+        .mat-progress-bar-buffer {
+            background: #CFCFCF;
+        }
+    }
+}

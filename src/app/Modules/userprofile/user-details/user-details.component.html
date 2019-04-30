@@ -1,0 +1,64 @@
+
+<!-- <button mat-icon-button matTooltip="Back To Home"><i><a routerLink="/home">navigate_before</i></a></button> -->
+<div>
+<mat-card class="example-card">
+
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <h3 style="color: black">Hi {{userprofile.FirstName}} {{userprofile.LastName}}</h3><br><br>
+  </mat-card-header>
+
+  <mat-card-title>
+    <mat-icon color="primary" style="font-size: 100px;padding-left: 270px;">account_circle</mat-icon>
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-list class="con">
+      <mat-list-item style="padding-left: 200px;"><b>First Name :</b>&nbsp;&nbsp;<span>{{userprofile.FirstName}}</span></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item style="padding-left: 200px;"><b>Last Name :</b>&nbsp;&nbsp;<span>{{userprofile.LastName}}</span></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item style="padding-left: 200px;"><b>Phone Number :&nbsp;&nbsp;</b><span>{{userprofile.PhoneNumber}}</span></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item style="padding-left: 200px;"><b>City :&nbsp;&nbsp;</b><span>{{userprofile.City}}</span></mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+    <br><br>  <button class="top" mat-raised-button color="warn" (click)="openDialog(userprofile.UserId)">Edit</button>
+   <br><br>
+   <form [formGroup]="addInterestForm">
+      <mat-form-field>
+          <mat-select placeholder="Select Package Type" formControlName="interest">
+              <mat-option *ngFor="let packagetype of packagetypelist" [value]="packagetype.Name">{{packagetype.Name}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    
+      <button mat-raised-button color="primary" type="submit" [disabled]="addInterestForm.invalid" (click)="addUserInterest()">Add</button> <br>&nbsp;&nbsp;
+    </form>
+  <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <b style="font-size : medium;">Your Interests</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- <b style="color:black;font-size:medium;">Your Interests</b> -->
+        <div *ngIf="userprofile.Interests == null" class="alert alert-info" style="width: 50%;">
+          You have no interests !!!
+        </div>
+<mat-panel-description>
+<div class="div">
+  <table>
+    <!-- <tr *ngFor="let interestItem of userinterest"> -->
+        <tr *ngFor="let interestItem of interests">
+      <td>{{interestItem.Interest}}</td>
+      <td><a mat-button style="margin-left:400px" (click)="deleteUserInterest(interestItem.UserInterestID)" matTooltip="Delete"><i style="font-size: 20px " class="material-icons">delete</i></a></td>
+    </tr>
+  </table>
+</div>
+</mat-panel-description> 
+       </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>   
+</mat-card>
+<button  mat-icon-button matTooltip="Back To Home"><a routerLink="/home"><i style="font-size: 40px; " class="material-icons">navigate_before</i></a></button>
+</div>

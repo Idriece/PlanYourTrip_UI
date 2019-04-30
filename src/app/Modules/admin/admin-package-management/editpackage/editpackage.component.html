@@ -1,0 +1,68 @@
+<div class="head-container">
+  <h3>Edit Package</h3>
+  <br>
+  <div *ngIf="data" style="text-align:center">Package Name: <strong>{{data.PackageName}}</strong></div>
+  <br>
+  <form [formGroup]="editpackageForm" #editpackage="ngForm" (ngSubmit)="onSave(editpackage)">
+
+    <mat-form-field>
+      <mat-select placeholder="Select Package Type" formControlName="packagetypeid" required>
+        <mat-option *ngFor="let packagetype of packagestypelist" [value]="packagetype.PackageTypeID">{{packagetype.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="text" formControlName="packageName" placeholder="PackageName" required>
+      <mat-error>
+        <div *ngIf="function.packageName.invalid && function.packageName.touched">
+          <div *ngIf="Packagename.errors.unique">
+            Enter <strong>Unique</strong> Package Name
+          </div>
+          <div *ngIf="Packagename.errors.pattern">
+            Enter valid Name
+          </div>
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <input matInput type="number" formControlName="numAvailable" placeholder="NumberAvailable" required>
+      <mat-hint align="end">Number Available 1-20</mat-hint>
+      <mat-error *ngIf="function.numAvailable.invalid && function.numAvailable.touched">
+        Invalid
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" formControlName="minimumPeople" placeholder="MinimumPeople" required>
+      <mat-hint align="end">Minimum People 1-14</mat-hint>
+      <mat-error *ngIf="function.minimumPeople.invalid && function.minimumPeople.touched">
+        Invalid
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput type="number" formControlName="maximumPeople" placeholder="MaximumPeople" required>
+      <mat-hint align="end">Maximum People 1-15</mat-hint>
+      <mat-error *ngIf="function.maximumPeople.invalid && function.maximumPeople.touched">
+        <div *ngIf="max.errors.isError">
+          Wrong Input.
+        </div>
+        Invalid
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput formControlName="summary" placeholder="Summary" required></textarea>
+      <mat-hint align="end">Proper Summary</mat-hint>
+      <mat-error *ngIf="function.summary.invalid && function.summary.touched">
+        Invalid
+      </mat-error>
+    </mat-form-field>
+    <br> 
+    <button mat-raised-button color="primary" *ngIf="disable" [disabled]="!editpackageForm.valid" type="submit">Update</button>
+    <button mat-raised-button color="primary" type="reset" (click)="CloseDialog()">Cancel</button>
+  </form>
+</div>

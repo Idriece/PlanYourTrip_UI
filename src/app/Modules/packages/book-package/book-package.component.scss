@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+
+@mixin booking-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    #booking-title, .book-form {
+        padding: 0.5em 2em;
+    }
+    .row-label, .form-field, #cost {
+        padding: 0.25em 1.5em;
+    }
+    .submit-button {
+        margin: 1.5em;
+    }
+    .book-button {
+        background-color: mat-color($primary);
+        color: white;
+    }
+}

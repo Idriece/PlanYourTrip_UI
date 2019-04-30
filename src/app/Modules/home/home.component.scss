@@ -1,0 +1,42 @@
+.div-home {
+    width: 100%;
+    display: inline-flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.image-slider {
+    width: 100%; 
+    height: 60vh;
+}
+
+.search-bar {
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-35px);
+    z-index: 4;
+}
+
+.suggested-packages {
+    width: 100%;
+    display: inline-flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+#header {
+    margin-bottom: 50px;
+}
+
+#header2 {
+    margin-bottom: 50px;
+}
+
+.categories {
+    width: 100%;
+    margin-bottom: 20px;
+}

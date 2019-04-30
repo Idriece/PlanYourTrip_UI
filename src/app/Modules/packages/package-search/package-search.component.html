@@ -1,0 +1,58 @@
+<app-search-bar class="search"></app-search-bar>
+<div id="search-container">
+  <div id="filters">
+    <form>
+      <div class="filter">
+        <mat-form-field>
+          <mat-label>Package Type</mat-label>
+          <mat-select [(ngModel)]="packageType" name="packageType" (selectionChange)="updateFilters()">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let type of packageTypes" [value]="type">{{ type }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Number of People" thumbLabel="true" [(ngModel)]="numPeople" name="numPeople" (change)="updateFilters()" min="0">
+        </mat-form-field>
+      </div>
+      <div class="filter">
+        <mat-form-field>
+          <input matInput type="number" step="100" placeholder="Min Price" [(ngModel)]="minPrice" name="minPrice" (change)="updateFilters()" min="0" [max]="maxPrice">
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" step="100" placeholder="Max Price" [(ngModel)]="maxPrice" name="maxPrice" (change)="updateFilters()" [min]="minPrice ? minPrice : 0">
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="filter">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Min Days" [(ngModel)]="minDays" name="minDays" (change)="updateFilters()" min="0" [max]="maxDays">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Max Days" [(ngModel)]="maxDays" name="maxDays" (change)="updateFilters()" [min]="minDays ? minDays : 0">
+        </mat-form-field>
+      </div>
+      <div class="filter">
+        <mat-form-field>
+          <mat-label>Rating</mat-label>
+          <mat-select [(ngModel)]="rating" name="rating" (selectionChange)="updateFilters()">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let range of ratings" [value]="range">{{ range }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Sort By</mat-label>
+          <mat-select [(ngModel)]="sort" name="sort" (selectionChange)="updateFilters()">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let sortType of sorts" [value]="sortType">{{ sortType }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div id="results">
+    <mat-progress-spinner id="progress-spinner" *ngIf="!packages" color="warn" mode="indeterminate"></mat-progress-spinner>
+    <p *ngIf="packages && (!filtered || filtered.length == 0)">Sorry, there were no packages that matched your search</p>
+    <app-package-list class="package-list" *ngIf="filtered && !(filtered.length == 0)" [packages]=filtered></app-package-list>
+  </div>
+</div>

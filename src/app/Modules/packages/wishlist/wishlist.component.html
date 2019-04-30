@@ -1,0 +1,7 @@
+<div id="header">
+  <h2>My Wishlist</h2>
+</div>
+<p *ngIf="empty">You have no packages in your wishlist</p>
+<div id="wishlist">
+  <app-package-list class="!empty" *ngIf="packages && !(packages.length == 0)" [packages]=packages></app-package-list>
+</div>

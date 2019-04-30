@@ -1,0 +1,52 @@
+<mat-toolbar class="toolbar" color="primary">
+  <div id="toolbar-div" class="div-spaced-row">
+    <div class="div-left">
+      <span id="nav-title">{{title}}</span>
+      <div *ngIf="!isAdminLogin()" class="home-links">
+        <span id="home-toolbar-item" class="toolbar-item">
+          <a class="toolbar-link" routerLink='' routerLinkActive="toolbar-link">Home</a>
+        </span>
+        <span class="toolbar-item">
+          <a class="toolbar-link" routerLink="/packages" routerLinkActive="toolbar-link">Packages</a>
+        </span>
+      </div>
+    </div>
+
+    <div class="div-right" *ngIf="!isLogin()">
+      <span class="toolbar-item">
+        <a id="login"  class="toolbar-link"   (click)="openLoginDialog()">Login</a>
+        </span>
+        <span class="toolbar-item">
+          <a id="register"  class="toolbar-link"  (click)="openSignupDialog()">Register</a>
+          </span>
+  </div>
+ 
+  <div class="div-right" *ngIf="isLogin()">   
+
+          <span *ngIf="isAdminLogin()" class="toolbar-item" style="margin-right:10px;">
+            <a id="My_DashBoard" class="toolbar-link" routerLink="/admin" >My Dashboard   </a>
+          </span>
+          
+              <span *ngIf="isHotelOwnerLogin()" class="toolbar-item" style="margin-right:10px;">
+              <a id="My_DashBoard" class="toolbar-link" routerLink="/hotel" >My Dashboard   </a>
+            </span>
+
+    <span *ngIf="isTransportationProviderLogin()" class="toolbar-item" style="margin-right:10px;">
+                <a id="My_DashBoard" class="toolbar-link" routerLink="/transport-owner" >My Dashboard   </a>
+        
+                </span>
+    <span class="toolbar-item" *ngIf="!isAdminLogin() && !isHotelOwnerLogin() && !isTransportationProviderLogin()">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="toolbar-link"><mat-icon>person</mat-icon></button>
+        <mat-menu #userMenu="matMenu" id="user-menu" overlapTrigger="false">
+          <a id="profile" class="user-menu-option" routerLink="/user/userdetail">My Profile</a><br>
+          <a id="Booking" class="user-menu-option" routerLink="/user/booklist">My Booking</a><br>
+          <a id="wishlist" class="user-menu-option" routerLink="/packages/wishlist">Wishlist</a>
+        </mat-menu>
+      </span>
+
+    <span class="toolbar-item">
+        <a id="logout" class="toolbar-link" (click)="Logout()">Logout</a>
+      </span>
+  </div>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,6 @@
+<div class="search-form">
+  <mat-form-field id="search-box" class="search-field">
+    <input matInput class="mdc-text-field__input" #search id="search-input" [value]="term" matInput placeholder="Search..." (keyup.enter)="onSearch(search.value)">
+    <button mat-button color="primary" (click)="onSearch(search.value)"><i id="search-button" class="material-icons">search</i></button>
+  </mat-form-field>
+</div>

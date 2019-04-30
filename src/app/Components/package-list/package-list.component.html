@@ -1,0 +1,58 @@
+<mat-accordion class="pack-accordion">
+  <mat-expansion-panel *ngFor="let package of packages | slice:pageIndex*pageLength:pageIndex*pageLength+pageLength; index as i"
+    class="package-panel" style="margin-bottom: 30px;">
+    <mat-expansion-panel-header collapsedHeight="200px" expandedHeight="220px">
+      <mat-grid-list cols="3" rowHeight="45px" class="pack-grid" colWidth="30%" gutterSize="1px">
+        <mat-grid-tile class="pack-tile">
+          <div class="tile" style="justify-content:flex-start; align-items:flex-start;">
+            <h5>{{ package.PackageName }}</h5>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="pack-tile">
+          <div class="tile">
+            {{ package.Price | currency:'INR':'symbol':'1.0-0' }} Per Person
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]=4>
+          <div class="pack-image">
+            <img class="pack-image" mat-card-image src="{{ package.Image }}">
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="pack-tile">
+          <div class="tile">
+            Duration: {{ package.Days }} days <i class="material-icons pack-icon">schedule</i>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="pack-tile">
+          <div class="tile">
+            Number Available: {{ package.NumberAvailable }}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="pack-tile">
+          <div class="tile">
+            Min People {{ package.MinPeople }}<i class="material-icons pack-icon">people</i>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="pack-tile">
+          <div class="tile">
+            Max People {{ package.MaxPeople }}<i class="material-icons pack-icon">people</i>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="pack-tile">
+          <div id="summary-tile" class="tile">
+            Summary: {{ package.Summary }}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="pack-tile">
+          <div class="tile">
+            Rating: {{ package.Rating }}
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-expansion-panel-header>
+    <a [routerLink]="['../package/', package.PackageID]"><button class="view-button" mat-raised-button color="primary">View Details</button></a>
+  </mat-expansion-panel>
+  <mat-paginator #paginator *ngIf="packages" [length]="packages.length" [pageSize]="10" [pageSizeOptions]="[10]" lastPageLabel="prevPage"
+    nextPageLabel="nextPage" (page)="pageIndex = $event.pageIndex">
+  </mat-paginator>
+</mat-accordion>

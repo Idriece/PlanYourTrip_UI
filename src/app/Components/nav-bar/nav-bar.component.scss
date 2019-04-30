@@ -1,0 +1,99 @@
+@import '~@angular/material/theming';
+
+@mixin theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+  
+    // Create theme specfic styles
+  
+  
+    mat-toolbar {
+        @include mat-elevation(8);
+        position: fixed;
+    }
+
+    #nav-title {
+        margin-right: 5%;
+    }
+
+    #toolbar-div {
+        padding-left: 2%;
+    }
+  
+    .package-card {
+        height: 20%;
+        width: 20%;
+    }
+  
+    .home-links {
+        width: 50%;
+    }
+
+    #home-toolbar-item {
+        margin-right: 10%;
+    }
+
+    .toolbar-item {
+        margin-right: 5%;
+        color: white;
+        text-decoration: none;
+    }
+
+    .mat-icon-button:focus {
+        outline: none;
+    }
+
+    .mat-menu-content {
+        background-color: mat-color($primary);
+        padding: 1em;
+        border: thin outset gray;
+        border-radius: 2px;
+    }
+
+    .toolbar-link:hover {
+        color: mat-color($accent);
+    }
+
+    .toolbar {
+        justify-content: space-between;
+    }
+    
+    a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.75em;
+    }
+        a:hover {
+            color: mat-color($accent);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+    #login:hover {
+        color: mat-color($accent)
+    }
+
+    #register:hover {
+        color: mat-color($accent)
+    }
+
+    #profile:hover {
+        color: mat-color($accent)
+    }
+
+    #logout:hover {
+        color: mat-color($accent)
+    }
+  
+    /*Icons*/
+    .favorite-icon {
+      color: none;
+      border-color: mat-color($primary);
+    }
+    .favorite-icon :hover {
+      color: mat-color($warn);
+    }
+  }
+

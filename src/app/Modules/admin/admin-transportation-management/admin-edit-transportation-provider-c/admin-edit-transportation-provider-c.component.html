@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Hi! Edit Transportation Partner</h2>
+<form [formGroup]="editTransportProvider" #Transport="ngForm" (ngSubmit)="HandleTransportFormSubmit(Transport)">
+  <mat-vertical-stepper>
+    <mat-step label="Edit Transport Provider Name">
+      <mat-form-field>
+        <input matInput type="text" formControlName="TransportProviderName" required placeholder="Update Transportation Provider Name">
+        <mat-error>
+          <div *ngIf="_getTProviderName.invalid && _getTProviderName.touched">
+            <div *ngIf="_getTProviderName.errors.required">
+              Transportation Provider's Name can't be Empty
+            </div>
+            <div *ngIf="_getTProviderName.errors.pattern">
+              Please Enter a Valid Name
+            </div>
+            <div *ngIf="_getTProviderName.errors.unique">
+              Please enter unique name
+            </div>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </mat-step>
+    <mat-step label="Edit Price">
+      <!--Car Price-->
+      <div>
+        <mat-checkbox (click)="CarInputVisibility()" formControlName="PriceCheckBox">Update Car Price</mat-checkbox><br/>
+        <div *ngIf="CarPricePriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="Car Price" matInput formControlName="CarPrice">
+            <mat-hint>greater than 500</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <mat-checkbox (change)="SUVPriceInputVisibility()">Add SUV Price</mat-checkbox><br/>
+        <div *ngIf="SUVRoomPriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="SUV Room Price" matInput formControlName="SUVPrice">
+            <mat-hint>greater than 1000</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <!--Traveller 12 Room Price-->
+      <div>
+        <mat-checkbox (click)="Traveller12PriceInputVisibility()">Update Traveller-12 Price</mat-checkbox><br/>
+        <div *ngIf="Traveller12PriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="Premium Room Price" matInput formControlName="Traveller12Price">
+            <mat-hint>Price/Per Person(min:400)</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <!--Traveller 16 Room Price-->
+      <div>
+        <mat-checkbox (click)="Traveller16PriceInputVisibility()">Update Traveller-16r Price</mat-checkbox><br/>
+        <div *ngIf="Traveller16RoomPriceInput">
+          <mat-form-field>
+            <input type="number" placeholder="Traveller 16 seater" matInput formControlName="Traveller16Price">
+            <mat-hint>Price/Per Person(min:500)</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  <div mat-dialog-actions *ngIf="saveVisibility">
+    <button type="submit" [disabled]="checkValid()" mat-button>Save Changes</button>
+    <button type="reset" (click)="onNoClick()" mat-button>Discard</button>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isProgressBar" ></mat-progress-bar> 
+</form>
+

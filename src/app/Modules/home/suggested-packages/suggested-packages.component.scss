@@ -1,0 +1,110 @@
+@mixin suggested-theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .home-card.mat-card {
+        background-color: rgb(40, 36, 36);
+        color: white;
+    }
+  
+    .suggested {
+        width: 100%;
+        min-width: 1500px;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .home-card {
+        flex: auto;
+        height: 150px;
+        width: 200px;
+        white-space: nowrap;
+        display: flex;
+        flex-grow: 0;
+    }
+
+    .home-card.mat-card {
+        display: inline-flex;
+        align-items: center;
+        flex-flow: column;
+        justify-content: space-between;
+        padding-top: 0;
+        overflow: hidden;
+    }
+
+    .home-card:hover {
+        cursor: pointer;
+    }
+
+    .home-card:hover > .home-card-title {
+        display: inline-block;
+    }
+
+    .header {
+        flex: auto;
+        width: 100%;
+        height: 100%;
+        white-space: nowrap;
+        display: flex;
+        flex: auto;
+    }
+
+    i {
+        color: rgba(0, 0, 0, 0.4);
+    }
+
+    .active {
+        display: initial;
+        color: mat-color($accent);
+    }
+
+    .stars.mat-card-content {
+        width: 100%;
+        white-space: nowrap;
+        display: inline-flex;
+        justify-content: center;
+        flex: auto;
+        margin-top: -10px;
+        z-index: 1;
+    }
+
+    .test {
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #left {
+        z-index: 4;
+        position: absolute;
+        left: 0;
+    }
+
+    #right {
+        z-index: 4;
+        position: absolute;
+        right: 0;
+    }
+
+    .icon-button {
+        color: mat-color($primary);
+    }
+
+    .home-card-title {
+        padding-top: 4px;
+        padding-left: 4px;
+        width: 100%;
+        height: 100%;
+        z-index: 6;
+        position: absolute;
+        display: none;
+        background-color: rgb(40, 36, 36);
+    }
+}

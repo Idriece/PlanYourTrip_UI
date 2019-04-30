@@ -1,0 +1,5 @@
+<div class="example-container">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dp3" placeholder="Start Date" disabled [(ngModel)]="myDate" >
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+</div>

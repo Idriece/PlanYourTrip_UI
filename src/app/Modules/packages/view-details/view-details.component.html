@@ -1,0 +1,186 @@
+<div class="view-details">   
+    <div class="grid">
+        <mat-grid-list cols="3" rowHeight="40px" class="detail-grid" colWidth="30%" gutterSize="1px">
+            <mat-grid-tile class="detail-tile">
+                <div *ngIf="!package" class="tile">
+                    <mat-progress-bar id="title" *ngIf="!package" class="progress" mode="query"></mat-progress-bar>
+                </div>
+                <div *ngIf="package" class="tile">
+                    <h3 *ngIf="package">{{ package.PackageName }}</h3>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="detail-tile">
+                <div *ngIf="!package" class="tile">
+                    <mat-progress-bar *ngIf="!package" class="progress" mode="query"></mat-progress-bar>
+                </div>
+                <div *ngIf="package" class="tile">
+                    Price Per Person: {{ totalPrice | currency:'INR':true }}
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]=4>
+                <div class="detail-image">
+                    <img *ngIf="package" class="detail-image" mat-card-image src="{{ package.Image }}">
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="detail-tile">
+                <div *ngIf="!package" class="tile">
+                    <mat-progress-bar *ngIf="!package" class="progress" mode="query"></mat-progress-bar>
+                </div>
+                <div *ngIf="package" class="tile">
+                    Duration: {{ package.Days }} days <i class="material-icons pack-icon">schedule</i>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="pack-tile">
+                <div *ngIf="!package" class="tile">
+                    <mat-progress-bar *ngIf="!package" class="progress" mode="query"></mat-progress-bar>
+                </div>
+                <div *ngIf="package" class="tile">
+                    Number Available: {{ package.NumberAvailable }}
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="pack-tile">
+                <div *ngIf="!package" class="tile">
+                    <mat-progress-bar *ngIf="!package" class="progress" mode="query"></mat-progress-bar>
+                </div>
+                <div *ngIf="package" class="tile">
+                    Min People {{ package.MinPeople }}<i class="material-icons detail-icon">people</i>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="pack-tile">
+                <div *ngIf="!package" class="tile">
+                    <mat-progress-bar *ngIf="!package" class="progress" mode="query"></mat-progress-bar>
+                </div>
+                <div *ngIf="package" class="tile">
+                    Max People {{ package.MaxPeople }}<i class="material-icons detail-icon">people</i>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="detail-tile" [colspan]="2" [rowspan]="2">
+                <div *ngIf="!package" class="tile">
+                    <mat-progress-bar *ngIf="!package" class="progress" mode="query"></mat-progress-bar>
+                </div>
+                <div id="detail-summary-tile" *ngIf="package" class="tile">
+                    Summary: {{ package.Summary }}
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <h5 class="feed-header">Itinerary</h5>
+    <mat-progress-bar *ngIf="!itineraries" color="warn" mode="indeterminate"></mat-progress-bar>
+    <mat-accordion *ngIf="itineraries" multi="true">
+        <mat-expansion-panel *ngFor="let itinerary of itineraries; index as i;" [expanded]="isCustomizing">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Day {{ itinerary.DayNumber }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ itinerary.City }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="2" class="hotel-tile">
+                    <div class="left">
+                        <h6>Hotel: {{ itinerary.Hotel }}</h6>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="2" class="hotel-tile">
+                    <div class="center">
+                        <h6 *ngIf="!isCustomizing">{{ itinerary.RoomType }} Room</h6><i class="material-icons pack-icon">hotel</i>
+                        <mat-form-field *ngIf="itinerary && isCustomizing">
+                            <mat-select placeholder="{{ itinerary.RoomType }}" [(value)]="itinerary.CustomizedRoomPrice" (selectionChange)="setRoomPrice(itinerary.CustomizedRoomPrice, i)">
+                                <mat-option *ngFor="let room of filterRoomOptions(itinerary.ItineraryID)" [value]="room.Price" (click)="setRoomPriceID(room.RoomPriceID, i)">
+                                    {{ room.Type }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="2" class="hotel-tile">
+                    <div class="right">
+                        <h6 *ngIf="!isCustomizing">Room Price: {{ itinerary.RoomPrice | currency:'INR':true }}</h6>
+                        <h6 *ngIf="isCustomizing">Room Price: {{ itinerary.CustomizedRoomPrice | currency:'INR':true }}</h6>
+                        <br>
+                        <div style="width: 300px; height: 200px; display: inline-flex; justify-content: center; align-items: center;">
+                        <img style="height: 100%; width: 100%;" mat-card-image src="{{ itinerary.HotelImage }}">
+                        </div>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="left" style="padding-right: 8px;">
+                        <h6>Activity Details:</h6> {{ itinerary.ActivityDetails }}
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <div class="center">
+                        <h6 *ngIf="!isCustomizing">Transportation: {{ itinerary.TransportationMode }}</h6>provided by {{ itinerary.TransportationProviderName }}<i class="material-icons pack-icon">directions_car</i>
+                        <mat-form-field *ngIf="itinerary && isCustomizing">
+                            <mat-select placeholder="{{ itinerary.TransportationType }}" [(value)]="itinerary.CustomizedTransportationPrice" (selectionChange)="setTransportationPrice(itinerary.CustomizedTransportationPrice, i)">
+                                <mat-option *ngFor="let transportation of filterTransportationOptions(itinerary.ItineraryID)" [value]="transportation.Price" (click)="setTransportationPriceID(transportation.TransportationPriceID, i)">
+                                    {{ transportation.Mode }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="hotel-tile">
+                    <div class="right">
+                        <h6 *ngIf="!isCustomizing">Transportation Price: {{ itinerary.TransportationPrice | currency:'INR':true }}</h6>
+                        <h6 *ngIf="isCustomizing">Transportation Price: {{ itinerary.CustomizedTransportationPrice | currency:'INR':true }}</h6>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <!--<div class="book">
+        <button *ngIf="isCustomizing" id="cancel-button" mat-raised-button color="primary" (click)="cancelCustomize()">Cancel</button>
+        <button *ngIf="!isCustomizing" id="customize-button" mat-raised-button color="primary" (click)="customizePackage()">Customize</button>
+        <button id="book-button" mat-raised-button color="primary" (click)="bookPackage()">Book Now</button>
+    </div>-->
+
+    <div class="feedback-panel">
+        <mat-accordion>   
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Reviews
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Click to View Reviews
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-grid-list cols="2" rowHeight="100px" *ngFor="let feedback of feedBacks">
+                    <mat-grid-tile [colspan]="1" [rowspan]="1" class="feedback-tile">
+                        <div class="left" *ngIf="feedBacks">
+                            <h6>{{ feedback.UserName }}</h6>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1" class="feedback-tile">
+                        <div class="center-rating" *ngIf="feedBacks">
+                            <i class="material-icons" *ngFor="let star of stars; index as i;" [ngClass]="{'active': stars[i] < feedback.Rating}">star</i>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1" class="hotel-tile">
+                        <div class="review" *ngIf="feedBacks">
+                            "{{ feedback.Review }}"
+                        </div>
+                    </mat-grid-tile>
+                    <mat-divider></mat-divider>
+                    <div class="divider"></div>
+                </mat-grid-list>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="bottom-bar">
+        <div class="bottom-bar-sheet">
+            Price Per Person: {{ totalPrice | currency:'INR':true }}
+            <button *ngIf="isCustomizing" id="cancel-button" mat-raised-button color="primary" (click)="cancelCustomize()">Cancel</button>
+            <button *ngIf="!isCustomizing" [disabled]="!package" id="customize-button" mat-raised-button color="primary" (click)="customizePackage()">Customize</button>
+            <button *ngIf="wishlist.UserName && !onWishlist" id="wishlist-add-button" mat-raised-button color="primary" (click)="addToWishlist()" [disabled]="wishlistButtonDisabled">Add to Wishlist</button>
+            <button *ngIf="wishlist.UserName && onWishlist" id="wishlist-remove-button" mat-raised-button color="primary" (click)="removeFromWishlist()" [disabled]="wishlistButtonDisabled">Remove from Wishlist</button>
+            <button [disabled]="!package" id="book-button" mat-raised-button color="primary" (click)="bookPackage()">Book Now</button>
+        </div>
+    </div>
+</div>

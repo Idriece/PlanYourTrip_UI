@@ -1,0 +1,44 @@
+<!-- grid to show Heading -->
+<mat-grid-list cols="1" rowHeight="50px" ng-class="gridList">
+  <mat-grid-tile>
+    <h3 style="justify-content: left;">Transports You Own</h3>
+  </mat-grid-tile>
+</mat-grid-list>
+<hr/>
+
+<mat-progress-bar mode="indeterminate" *ngIf="isProgressBar" ></mat-progress-bar>
+<!--Displaying Transport List-->
+<div *ngIf="transportdetails?.length > 0">
+<mat-list role="list" style="margin-left:15%; margin-bottom:50px;">
+  <mat-list-item role="listitem">
+    <span style="padding-left:15px;width: 33%"><b>Transport Name</b></span>
+    <span style="width: 33%"><b>City</b></span>
+    <span style="width: 33%"><b> </b></span>
+  </mat-list-item>
+  <mat-accordion multi="false">
+    <mat-expansion-panel *ngFor="let transport of transportdetails" style="margin-right:25%">
+      <mat-expansion-panel-header>
+        <mat-panel-title style="width: 33%">
+          <h5> <i class="material-icons" style="margin-right:15px">person_pin</i>{{transport.TransportationProviderName}}</h5>
+        </mat-panel-title>
+        <mat-panel-title style="width: 33%">
+          <h5> <i class="fas fa-map-marked-alt" style="margin-right:5px"></i> {{transport.CityName}}</h5>
+        </mat-panel-title>
+        <mat-panel-title>
+          <h5> <a mat-button matTooltip="View Bookings for {{transport.TransportationProviderName}}" 
+            (click)="ViewTransportCheckIns(transport.TransportationProviderID)">
+            <i style="font-size: 50px " class="material-icons">list</i></a></h5>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-panel-description>
+        <div *ngFor="let price of transport.TransportationPrices">
+          <h6 style="margin-left:100px;"><i class="fas fa-car"></i> {{price.Name }} : <i class="fas fa-rupee-sign"></i>{{price.Price }} </h6>
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-list>
+</div>
+<div *ngIf="transportdetails?.length === 0">
+    <h3 align="center" style="padding-top:20px;">Oops!! You Dont Own any Transport</h3>
+</div>

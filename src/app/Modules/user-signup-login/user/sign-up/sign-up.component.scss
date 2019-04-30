@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";  
+
+
+// .medium-list {
+//     margin:auto;;
+//     width: 600px;
+//     padding: 100px;
+//     background-color: whitesmoke;
+//     overflow-y:auto !important; 
+//   }
+     
+//   .list-viewer-wrapper {
+//     border: 1px solid rgba(0, 0, 0, .03);
+//     box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
+//    // margin: 4px;
+//   }
+  
+  .list-header-title {
+   color: rgba(0, 0, 0, .54);
+   color: white;
+   background-color: #004d40; 
+   padding: 8px 0px 8px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+//   .form-container {
+//     display: flex;
+//     flex-direction: column;
+//   }
+ 
+//   .divider {
+//     margin-top: 20px !important; 
+//     background-color: green;
+
+//   }
+//   button{
+//     background-color: #0B4680;
+//     font-family: sans-serif;
+//     color: white;
+//     opacity: 0.7;
+//   }
+//   button:hover{
+//     opacity: 1;
+//   }
+//   .register
+//   {
+//     padding-top: 10px;
+//     padding-bottom: 10px;
+
+//     }
+//  .iconpack{
+//     font-size: 60px;
+//     text-align: center;
+//     padding-right: 45px;
+//     }

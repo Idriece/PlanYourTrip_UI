@@ -1,0 +1,28 @@
+<h5>Add Package Type</h5>
+<div>
+  <form [formGroup]="packagetype">
+    <mat-form-field>
+      <input matInput formControlName="Name" placeholder="Package Type" required>
+      <mat-error>
+        <div *ngIf="packagetypename.invalid && packagetypename.touched">
+          <div *ngIf="packagetypename.errors.unique">
+            Type Already Exist
+          </div>
+          Invalid Name
+        </div>
+      </mat-error>
+    </mat-form-field><br>
+    <div *ngIf="disable"> 
+    <button mat-raised-button type="submit" [disabled]="!packagetype.valid" (click)="addPackageType()">Add</button>
+    <button mat-raised-button type="submit" style="margin-left: 10px" (click)="CloseDialog()">Cancel</button>
+  </div>
+  </form>
+</div>
+<hr>
+<h5>Package Type List</h5>
+<div>
+  <div *ngFor="let type of packagetypelist | slice:pageIndex*pageLength:pageIndex*pageLength+pageLength">
+    {{type.Name}}
+  </div>
+  <mat-paginator #paginator *ngIf="packagetypelist" [length]="packagetypelist.length" [pageSize]="5" (page)="pageIndex = $event.pageIndex"></mat-paginator>
+</div>
